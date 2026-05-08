@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: xpro-platform
+    env: php
+    plan: free
+    buildCommand: sh build.sh
+    startCommand: php artisan serve --host=0.0.0.0 --port=10000
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: sql12.freesqldatabase.com
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_DATABASE
+        value: sql12825864
+      - key: DB_USERNAME
+        value: sql12825864
+      - key: DB_PASSWORD
+        value: jy1gNeDzdG
+      - key: NODE_VERSION
+        value: 18.x
