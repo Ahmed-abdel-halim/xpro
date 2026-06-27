@@ -4,59 +4,59 @@
 
 @section('content')
 <!-- Modern Hero Section -->
-<div class="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-[#e0f2f1] via-[#f5f5f5] to-[#e8f5e9] dark:from-[#0b1121] dark:via-[#1a1f2e] dark:to-[#0f172a] transition-all duration-500 rounded-[3rem] mb-20 shadow-2xl">
+<div class="relative min-h-[75vh] lg:min-h-[80vh] flex items-center overflow-hidden mb-12">
     <!-- Enhanced Decorative background elements -->
     <div class="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-yellow-400/30 to-amber-500/20 rounded-full blur-3xl animate-pulse"></div>
     <div class="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-br from-sky-400/20 to-blue-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-emerald-400/10 to-teal-500/5 rounded-full blur-3xl"></div>
 
-    <div class="container mx-auto px-10 relative z-10">
+    <div class="w-full px-6 relative z-10">
         <div class="flex flex-col lg:flex-row items-center gap-16 pt-20 lg:pt-0">
             
             <!-- Information Side (Right in RTL) -->
             <div class="lg:w-1/2 text-right order-2 lg:order-1">
                 <!-- Badge -->
-                <div class="inline-flex items-center gap-3 mb-8 bg-white/80 dark:bg-[#1e293b]/80 backdrop-blur-md px-5 py-2.5 rounded-full border border-[#004d40]/10 dark:border-white/10 shadow-lg">
-                    <div class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></div>
-                    <span class="text-sm font-black text-[#004d40] dark:text-amber-400">منصة تعليمية معتمدة</span>
-                    <i class="fa-solid fa-check-circle text-amber-500 text-sm"></i>
+                <div class="inline-flex items-center gap-2.5 mb-6 bg-white/80 dark:bg-[#1e293b]/80 backdrop-blur-md px-4 py-2 rounded-full border border-[#004d40]/10 dark:border-white/10 shadow-sm">
+                    <div class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></div>
+                    <span class="text-xs font-bold text-[#004d40] dark:text-amber-400">منصة تعليمية معتمدة</span>
+                    <i class="fa-solid fa-check-circle text-amber-500 text-xs"></i>
                 </div>
                 
                 <!-- Main Heading -->
-                <h1 class="text-5xl lg:text-7xl font-black text-[#004d40] dark:text-white leading-[1.1] mb-6">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-[#004d40] dark:text-white leading-[1.2] mb-6">
                     نحو مستقبل <br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00897b] to-[#00695c] dark:from-sky-400 dark:to-sky-600">تعليمي مشرق</span>
                 </h1>
                 
                 <!-- Enhanced Description -->
-                <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl leading-relaxed font-medium">
+                <p class="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-2xl leading-relaxed font-medium">
                     نؤمن بقدرة كل طالب على التفوق. منصة Xpro توفر لك بيئة تعليمية متكاملة تجمع بين المعلمين الخبراء، المحتوى التفاعلي، والتقنيات الحديثة لضمان تحقيق أهدافك الأكاديمية بثقة وتميز.
                 </p>
                 
                 <!-- Features List -->
-                <div class="space-y-4 mb-12">
-                    <div class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-center gap-3 text-gray-600 dark:text-gray-300">
                         <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center flex-shrink-0">
                             <i class="fa-solid fa-graduation-cap text-amber-600 dark:text-amber-400"></i>
                         </div>
-                        <span class="font-black">معلمون متخصصون في جميع المواد الدراسية</span>
+                        <span class="font-bold text-sm md:text-base">معلمون متخصصون في جميع المواد الدراسية</span>
                     </div>
-                    <div class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                    <div class="flex items-center gap-3 text-gray-600 dark:text-gray-300">
                         <div class="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-500/20 flex items-center justify-center flex-shrink-0">
                             <i class="fa-solid fa-laptop text-sky-600 dark:text-sky-400"></i>
                         </div>
-                        <span class="font-black">منصة تفاعلية تعمل على جميع الأجهزة</span>
+                        <span class="font-bold text-sm md:text-base">منصة تفاعلية تعمل على جميع الأجهزة</span>
                     </div>
-                    <div class="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                    <div class="flex items-center gap-3 text-gray-600 dark:text-gray-300">
                         <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
                             <i class="fa-solid fa-chart-line text-emerald-600 dark:text-emerald-400"></i>
                         </div>
-                        <span class="font-black">تتبع مستمر للتقدم الأكاديمي</span>
+                        <span class="font-bold text-sm md:text-base">تتبع مستمر للتقدم الأكاديمي</span>
                     </div>
                 </div>
                 
                 <!-- Enhanced CTA Buttons -->
-                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 lg:gap-6">
+                <div class="flex flex-row flex-wrap items-center justify-center lg:justify-start gap-4 lg:gap-6">
                     <a href="{{ route('register') }}" class="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-[#004d40] to-[#00695c] dark:from-sky-600 dark:to-sky-700 text-white font-black text-lg shadow-2xl transition-all duration-300 hover:shadow-3xl hover:-translate-y-1 overflow-hidden">
                         <span class="relative z-10 flex items-center gap-2">
                             <span>إبدأ رحلتك الآن</span>
@@ -76,16 +76,19 @@
             </div>
 
             <!-- Image Side (Left in RTL) -->
-            <div class="lg:w-1/2 relative order-1 lg:order-2 flex justify-center lg:justify-start">
+            <div class="lg:w-1/2 relative order-1 lg:order-2 flex justify-center lg:justify-end">
                 <!-- Main Image Container -->
                 <div class="relative w-full max-w-lg">
                     <!-- Background Circle Decor -->
                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] bg-yellow-400/40 dark:bg-sky-500/10 rounded-full"></div>
                     
-                    <!-- Teacher Image -->
-                    <img src="{{ asset('images/teacher_hero.png') }}" 
-                         alt="Xpro Teacher" 
-                         class="relative z-10 w-full h-auto drop-shadow-2xl transform transition-transform duration-700 hover:scale-105">
+                    <!-- Rounded Image Wrapper -->
+                    <div class="relative z-10 w-full h-auto rounded-[2rem] overflow-hidden border border-[#00555A]/15 dark:border-white/10 shadow-2xl bg-white/50 dark:bg-[#141c2f]/50 backdrop-blur-sm">
+                        <!-- Teacher Image -->
+                        <img src="{{ asset('images/teacher_hero.png') }}" 
+                             alt="Xpro Teacher" 
+                             class="w-full h-auto transform transition-transform duration-700 hover:scale-105">
+                    </div>
 
                     <!-- Floating Testimonial 1 -->
                     <div class="absolute top-[15%] -right-2 md:top-[20%] md:-right-10 z-20 flex bg-white/90 dark:bg-[#1e293b]/90 backdrop-blur-md p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl border border-white/50 dark:border-white/10 items-start gap-2 md:gap-3 animate-float-slow group cursor-default hover:scale-105 md:hover:scale-110 transition-transform">
@@ -106,7 +109,7 @@
                     </div>
 
                     <!-- Floating Testimonial 2 -->
-                    <div class="absolute bottom-[10%] -left-2 md:bottom-[20%] md:-left-6 z-20 flex bg-white/90 dark:bg-[#1e293b]/90 backdrop-blur-md p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl border border-white/50 dark:border-white/10 items-start gap-2 md:gap-3 animate-float translate-x-0 md:translate-x-4 lg:-translate-x-8 group cursor-default hover:scale-105 md:hover:scale-110 transition-transform">
+                    <div class="absolute bottom-[10%] left-0 md:bottom-[20%] md:left-0 z-20 flex bg-white/90 dark:bg-[#1e293b]/90 backdrop-blur-md p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl border border-white/50 dark:border-white/10 items-start gap-2 md:gap-3 animate-float translate-x-0 group cursor-default hover:scale-105 md:hover:scale-110 transition-transform">
                         <div class="w-7 h-7 md:w-10 md:h-10 rounded-full bg-amber-100 flex items-center justify-center overflow-hidden border-2 border-white flex-shrink-0">
                             <img src="https://i.pravatar.cc/150?u=mahmoud" alt="Avatar" class="w-full h-full object-cover">
                         </div>
@@ -158,7 +161,7 @@
         -webkit-text-fill-color: transparent;
     }
     h1, h2 {
-        font-family: 'Noto Sans Arabic', sans-serif;
+        font-family: 'Tajawal', sans-serif;
     }
     
     /* Counter Animation */
@@ -223,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-16 max-w-6xl mx-auto mb-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-16 max-w-[1440px] mx-auto mb-24 px-6">
         @foreach($stages as $stage)
             <a href="{{ route('stage.show', $stage->id) }}" 
                class="group relative overflow-hidden rounded-[24px] bg-white dark:bg-[#141c2f] border border-[#00555A]/10 dark:border-white/10 hover:border-amber-500 dark:hover:border-sky-500 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/10 dark:hover:shadow-sky-500/10">
@@ -273,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- Student Reviews Section -->
-    <div class="max-w-6xl mx-auto mb-24 px-6 scroll-mt-24">
+    <div class="max-w-[1440px] mx-auto mb-24 px-6 scroll-mt-24">
         <div class="text-center mb-16">
             <h2 class="text-4xl lg:text-5xl font-black mb-6 gradient-text">آراء الطلاب</h2>
             <p class="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -369,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- Teacher Reviews Section -->
-    <div class="max-w-6xl mx-auto mb-24 px-6 scroll-mt-24">
+    <div class="max-w-[1440px] mx-auto mb-24 px-6 scroll-mt-24">
         <div class="text-center mb-16">
             <h2 class="text-4xl lg:text-5xl font-black mb-6 gradient-text">آراء المدرسين</h2>
             <p class="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -425,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- FAQ Section -->
-    <div id="faq" class="max-w-6xl mx-auto mb-24 px-6 scroll-mt-24">
+    <div id="faq" class="max-w-[1440px] mx-auto mb-24 px-6 scroll-mt-24">
         <div class="text-center mb-16">
             <h2 class="text-4xl lg:text-5xl font-black mb-6 gradient-text">الأسئلة الشائعة</h2>
             <p class="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -435,15 +438,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <div class="space-y-4" x-data="{ active: null }">
             @foreach($faqs as $faq)
-                <div class="group border border-[#00555A]/10 dark:border-white/5 rounded-3xl overflow-hidden bg-white/50 dark:bg-[#141c2f]/50 backdrop-blur-md transition-all duration-300">
+                <div class="group border border-[#00555A]/10 dark:border-white/5 rounded-2xl overflow-hidden bg-white/50 dark:bg-[#141c2f]/50 backdrop-blur-md transition-all duration-300">
                     <button @click="active = (active === {{ $loop->index }} ? null : {{ $loop->index }})" 
-                            class="w-full px-8 py-6 text-right flex items-center justify-between gap-4 group-hover:bg-amber-500/5 dark:group-hover:bg-sky-500/5 transition-colors">
-                        <span class="text-lg md:text-xl font-bold text-[var(--text-color)] dark:text-white transition-colors" :class="active === {{ $loop->index }} ? 'text-amber-600 dark:text-sky-400' : ''">
+                            class="w-full px-6 py-5 text-right flex items-center justify-between gap-4 group-hover:bg-amber-500/5 dark:group-hover:bg-sky-500/5 transition-colors">
+                        <span class="text-sm md:text-base font-bold text-[var(--text-color)] dark:text-white transition-colors" :class="active === {{ $loop->index }} ? 'text-amber-600 dark:text-sky-400' : ''">
                             {{ $faq->question }}
                         </span>
-                        <div class="flex-shrink-0 w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 dark:bg-sky-500/10 dark:text-sky-400 flex items-center justify-center transition-all duration-300" 
+                        <div class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-500/10 text-amber-600 dark:bg-sky-500/10 dark:text-sky-400 flex items-center justify-center transition-all duration-300" 
                              :class="active === {{ $loop->index }} ? 'rotate-180 bg-amber-500 dark:bg-sky-500 text-white' : ''">
-                            <i class="fa-solid fa-chevron-down text-sm"></i>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
                         </div>
                     </button>
                     

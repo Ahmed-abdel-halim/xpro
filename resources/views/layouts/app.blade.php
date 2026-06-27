@@ -92,7 +92,7 @@
     </script>
     <!-- FontAwesome for Real Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Tajawal:wght@200;300;400;500;700;800;900&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -121,10 +121,23 @@
         [x-cloak] { display: none !important; }
         
         body {
-            font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
+            font-family: 'Outfit', 'Tajawal', 'Noto Sans Arabic', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .grid-bg {
+            background-image: linear-gradient(to right, rgba(100, 116, 139, 0.04) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(100, 116, 139, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .dark .grid-bg {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
         .glass {
             background: var(--nav-bg);
@@ -234,7 +247,7 @@
 
     </style>
 </head>
-<body class="min-h-screen bg-[var(--bg-color)] flex flex-col relative overflow-x-hidden">
+<body class="min-h-screen bg-[var(--bg-color)] flex flex-col relative overflow-x-hidden grid-bg">
     <!-- Animated Waves Background -->
     <div class="waves-container">
         <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
@@ -252,45 +265,44 @@
 
     <!-- Navigation -->
     <nav class="glass sticky top-0 z-[900] px-6 py-4 transition-all duration-300 w-full">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-16 space-x-reverse">
-                <a href="{{ route('home') }}" class="flex items-center space-x-3 space-x-reverse group">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500 dark:bg-sky-600 flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-all duration-300">
-                        <i class="fa-solid fa-graduation-cap text-xl"></i>
-                    </div>
-                    <span class="text-2xl font-black text-white transition-colors">Xpro</span>
-                </a>
-                <div class="hidden lg:flex space-x-6 space-x-reverse mr-12">
-                    <a href="{{ route('home') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">الرئيسية</a>
-                    <a href="{{ route('about') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">عن المنصة</a>
-                    <a href="{{ route('services') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">خدماتنا</a>
-                    <a href="{{ route('faq') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">الأسئلة الشائعة</a>
-                    <a href="{{ route('contact') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">تواصل معنا</a>
-                </div>
+        <div class="max-w-[1440px] mx-auto flex justify-between items-center px-4">
+            <!-- Logo -->
+            <a href="{{ route('home') }}" class="flex items-center space-x-3 space-x-reverse group">
+                <i class="fa-solid fa-graduation-cap text-3xl text-[#fbbf24] dark:text-sky-400 group-hover:scale-110 transition-transform duration-300"></i>
+                <span class="text-2xl font-black text-white transition-colors">Xpro</span>
+            </a>
 
+            <!-- Navigation Links (Center) -->
+            <div class="hidden lg:flex space-x-6 space-x-reverse">
+                <a href="{{ route('home') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">الرئيسية</a>
+                <a href="{{ route('about') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">عن المنصة</a>
+                <a href="{{ route('services') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">خدماتنا</a>
+                <a href="{{ route('faq') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">الأسئلة الشائعة</a>
+                <a href="{{ route('contact') }}" class="nav-link text-white hover:text-white/80 transition-all font-black text-sm tracking-wide">تواصل معنا</a>
             </div>
-            <div class="flex items-center space-x-3 space-x-reverse md:space-x-6">
+
+            <!-- Actions (Left) -->
+            <div class="flex items-center space-x-2 space-x-reverse">
                 <!-- Theme Switcher -->
                 <button @click="darkMode = !darkMode; localStorage.setItem('theme', darkMode ? 'dark' : 'light')" 
-                        class="w-12 h-12 rounded-2xl flex items-center justify-center transition-all bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-600 dark:text-white border border-gray-200 dark:border-white/20 shadow-sm dark:shadow-lg">
-                    <i class="fa-solid text-xl" :class="darkMode ? 'fa-sun' : 'fa-moon'"></i>
+                        class="w-9 h-9 rounded-xl flex items-center justify-center transition-all bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-600 dark:text-white border border-gray-200 dark:border-white/20 shadow-sm">
+                    <i class="fa-solid text-sm" :class="darkMode ? 'fa-sun' : 'fa-moon'"></i>
                 </button>
 
                 @guest
-                    <a href="{{ route('login') }}" class="nav-link text-white hover:text-white/80 transition font-black text-base hidden md:block">دخول</a>
-                    <a href="{{ route('register') }}" class="px-8 py-3.5 rounded-2xl bg-[#fbbf24] hover:bg-[#f59e0b] text-[#00555A] dark:bg-sky-600 dark:hover:bg-sky-700 dark:text-white transition-all font-black text-base shadow-xl shadow-amber-500/20 dark:shadow-sky-600/20">سجل الآن</a>
+                    <a href="{{ route('login') }}" class="px-4 py-2 rounded-xl bg-[#fbbf24] hover:bg-[#f59e0b] text-[#00555A] dark:bg-sky-600 dark:hover:bg-sky-700 dark:text-white transition-all font-bold text-xs shadow-sm">سجل الآن</a>
                 @else
                     <div class="relative" x-data="{ open: false }">
-                        <button @click="open = !open" @click.away="open = false" class="flex items-center space-x-3 space-x-reverse focus:outline-none group">
+                        <button @click="open = !open" @click.away="open = false" class="flex items-center space-x-2 space-x-reverse focus:outline-none group">
                             <div class="hidden md:flex flex-col text-left items-end">
-                                <span class="user-name text-base font-black text-white group-hover:text-white/80 transition">{{ auth()->user()->name }}</span>
-                                <span class="user-name text-[10px] text-white/60 font-black uppercase tracking-widest">{{ auth()->user()->role }}</span>
+                                <span class="user-name text-xs font-bold text-white group-hover:text-white/80 transition">{{ auth()->user()->name }}</span>
+                                <span class="user-name text-[9px] text-white/60 font-medium uppercase tracking-widest">{{ auth()->user()->role }}</span>
                             </div>
-                            <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-gray-100 dark:border-white/20 group-hover:border-sky-600 dark:group-hover:border-white shadow-xl transition-all duration-300">
+                            <div class="w-9 h-9 rounded-xl overflow-hidden border border-gray-100 dark:border-white/20 group-hover:border-sky-600 dark:group-hover:border-white shadow-md transition-all duration-300">
                                 @if(auth()->user()->avatar)
                                     <img src="{{ asset('storage/' . auth()->user()->avatar) }}" class="w-full h-full object-cover">
                                 @else
-                                    <div class="w-full h-full bg-amber-500 dark:bg-sky-600 flex items-center justify-center text-white font-black text-lg">
+                                    <div class="w-full h-full bg-amber-500 dark:bg-sky-600 flex items-center justify-center text-white font-bold text-sm">
                                         {{ substr(auth()->user()->name, 0, 1) }}
                                     </div>
                                 @endif
@@ -325,8 +337,8 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="lg:hidden relative" x-data="{ mobileMenuOpen: false }">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" @click.away="mobileMenuOpen = false" class="w-12 h-12 rounded-2xl flex items-center justify-center transition-all bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-600 dark:text-white border border-gray-200 dark:border-white/20 shadow-sm dark:shadow-lg">
-                        <i class="fa-solid fa-bars text-xl"></i>
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" @click.away="mobileMenuOpen = false" class="w-9 h-9 rounded-xl flex items-center justify-center transition-all bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-gray-600 dark:text-white border border-gray-200 dark:border-white/20 shadow-sm">
+                        <i class="fa-solid fa-bars text-sm"></i>
                     </button>
                     <!-- Mobile Dropdown -->
                     <div x-show="mobileMenuOpen" 
@@ -376,7 +388,7 @@
         }
     }" 
     @toast.window="add($event.detail.message, $event.detail.type)"
-    class="w-full max-w-7xl mx-auto px-6 py-12 relative main-content-wrapper flex-grow min-h-[70vh]">
+    class="w-full max-w-[1440px] mx-auto px-6 py-12 relative main-content-wrapper flex-grow min-h-[70vh]">
         @yield('content')
 
         <!-- Global Toast Notifications -->
@@ -527,15 +539,13 @@
     <footer class="glass mt-auto border-t border-white/10 relative z-10 w-full">
         <!-- Main Footer Content -->
         <div class="bg-gradient-to-br from-[#004d40]/95 to-[#00695c]/95 dark:from-gray-800/95 dark:to-gray-700/95 backdrop-blur-md">
-            <div class="max-w-7xl mx-auto px-6 py-16">
+            <div class="max-w-[1440px] mx-auto px-6 py-16">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     
                     <!-- About Section -->
                     <div class="space-y-4">
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="w-12 h-12 rounded-2xl bg-amber-500 dark:bg-sky-600 flex items-center justify-center text-white shadow-lg">
-                                <i class="fa-solid fa-graduation-cap text-xl"></i>
-                            </div>
+                            <i class="fa-solid fa-graduation-cap text-3xl text-[#fbbf24] dark:text-sky-400"></i>
                             <span class="text-2xl font-black text-white">Xpro</span>
                         </div>
                         <p class="text-gray-300 leading-relaxed">
@@ -681,7 +691,7 @@
 
         <!-- Bottom Footer -->
         <div class="bg-[#003d33] dark:bg-gray-900 border-t border-white/5">
-            <div class="max-w-7xl mx-auto px-6 py-6 text-center">
+            <div class="max-w-[1440px] mx-auto px-6 py-6 text-center">
                 <p class="text-gray-400 text-sm mb-4">
                     &copy; {{ date('Y') }} Xpro. جميع الحقوق محفوظة. للتعليم التفاعلي في متناول الجميع
                 </p>
@@ -710,9 +720,9 @@
         $whatsappUrl = "https://wa.me/" . preg_replace('/[^0-9]/', '', $whatsappNumber) . "?text=" . urlencode("السلام عليكم، أود الاستفسار عن خدمات منصة Xpro");
     @endphp
     <a href="{{ $whatsappUrl }}" target="_blank" 
-       class="fixed bottom-6 right-6 w-16 h-16 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-50 whatsapp-float" 
+       class="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-12 h-12 md:w-16 md:h-16 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-50 whatsapp-float" 
        title="تواصل معنا عبر واتساب">
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <i class="fa-brands fa-whatsapp text-2xl md:text-3xl"></i>
         <span class="pulse-ripple"></span>
         <div class="whatsapp-tooltip">تواصل معنا</div>
     </a>

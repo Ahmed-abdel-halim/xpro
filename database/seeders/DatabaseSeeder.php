@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Primary Admin
-        User::updateOrCreate(
+        $admin = User::updateOrCreate(
             ['email' => 'admin@xpro.com'],
             [
                 'name' => 'Admin User',
@@ -25,29 +25,8 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Teacher Users
-
-        User::updateOrCreate(
-            ['email' => 'teacher@xpro.com'],
-            [
-                'name' => 'Teacher User',
-                'password' => \Hash::make('password'),
-                'role' => 'teacher',
-                'is_approved' => true,
-            ]
-        );
-
         // Additional Admins
         User::factory(2)->admin()->create();
-
-        // Approved Teachers
-        User::factory(5)->teacher()->create();
-
-        // Pending Teachers (awaiting approval)
-        User::factory(3)->pendingTeacher()->create();
-
-        // Students
-        User::factory(20)->create(); // Default role is student
 
 
         // Stages
@@ -76,7 +55,7 @@ class DatabaseSeeder extends Seeder
                             $course = \App\Models\Course::updateOrCreate(
                                 ['title' => 'دورة اللغة العربية التأسيسية'],
                                 [
-                                    'teacher_id' => 2, // The teacher we created
+                                    'teacher_id' => $admin->id, // The admin user we created
                                     'subject_id' => $subject->id,
                                     'description' => 'شرح كامل ومبسط لقواعد اللغة العربية لطلاب الصف الأول الابتدائي.',
                                     'price' => 150.00,
