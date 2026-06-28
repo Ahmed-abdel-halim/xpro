@@ -31,11 +31,31 @@ class DatabaseSeeder extends Seeder
 
         // Stages
         $stages = [
-            ['name' => 'المرحلة الابتدائية', 'description' => 'تأسيس قوي لمستقبل مشرق'],
-            ['name' => 'المرحلة الإعدادية', 'description' => 'تمكين مهارات التفكير والتحليل'],
-            ['name' => 'المرحلة الثانوية', 'description' => 'طريقك نحو القمة والجامعة'],
-            ['name' => 'التعليم الجامعي', 'description' => 'تخصص أكاديمي معمق'],
-            ['name' => 'سوق العمل', 'description' => 'مهارات احترافية للنجاح الوظيفي'],
+            [
+                'name' => 'المرحلة الابتدائية',
+                'description' => 'تأسيس قوي لمستقبل مشرق',
+                'image' => '/images/stages/1772938475.webp'
+            ],
+            [
+                'name' => 'المرحلة الإعدادية',
+                'description' => 'تمكين مهارات التفكير والتحليل',
+                'image' => '/images/stages/1772939153.png'
+            ],
+            [
+                'name' => 'المرحلة الثانوية',
+                'description' => 'طريقك نحو القمة والجامعة',
+                'image' => '/images/stages/1772939164.png'
+            ],
+            [
+                'name' => 'التعليم الجامعي',
+                'description' => 'تخصص أكاديمي معمق',
+                'image' => '/images/stages/1772939556.webp'
+            ],
+            [
+                'name' => 'سوق العمل',
+                'description' => 'مهارات احترافية للنجاح الوظيفي',
+                'image' => '/images/stages/1772939773.png'
+            ],
         ];
 
         foreach ($stages as $stageData) {
