@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         );
 
         // Additional Admins
-        User::factory(2)->admin()->create();
+        // (Removed factory calls to avoid Faker dependency in production)
 
 
         // Stages
