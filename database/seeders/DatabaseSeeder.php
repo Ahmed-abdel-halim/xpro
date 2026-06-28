@@ -102,6 +102,10 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        $this->call([
+            FaqSeeder::class,
+            SettingSeeder::class,
+        ]);
     }
 
 }
