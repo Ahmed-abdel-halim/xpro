@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
+            'teacher.approved' => \App\Http\Middleware\TeacherApprovedMiddleware::class,
         ]);
         
         $middleware->validateCsrfTokens(except: [

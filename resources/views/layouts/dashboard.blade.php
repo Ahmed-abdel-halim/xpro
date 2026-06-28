@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="ar" dir="rtl">
 <head>
     <script>
         // منع الرعشة البيضاء بتطبيق الثيم قبل الرندر
         if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
+            document.documentElement.style.colorScheme = 'dark';
         } else {
             document.documentElement.classList.remove('dark');
+            document.documentElement.style.colorScheme = 'light';
         }
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="color-scheme" content="dark">
 
     <title>@yield('title', 'لوحة التحكم') - Xpro</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -51,7 +52,10 @@
             font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .theme-transition,
+        .theme-transition * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
         }
         .sidebar-glass {
             background: var(--sidebar-bg);
@@ -98,14 +102,7 @@
             transition: all 0.2s ease-in-out;
         }
         
-        /* Smooth page entrance */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .page-fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
+        /* Smooth page entrance removed to prevent flashing */
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -140,19 +137,28 @@
         }
 
     </style>
+    <!-- Hotwire Turbo for SPA-like persistent layout transitions without reloading sidebar -->
+    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.es2017-umd.js"></script>
+    <meta name="turbo-cache-control" content="no-cache">
 </head>
 <body class="overflow-hidden" x-data="{ 
     darkMode: document.documentElement.classList.contains('dark'),
     sidebarOpen: false,
     toggleTheme() {
+        document.documentElement.classList.add('theme-transition');
         this.darkMode = !this.darkMode;
         if (this.darkMode) {
             document.documentElement.classList.add('dark');
+            document.documentElement.style.colorScheme = 'dark';
             localStorage.setItem('theme', 'dark');
         } else {
             document.documentElement.classList.remove('dark');
+            document.documentElement.style.colorScheme = 'light';
             localStorage.setItem('theme', 'light');
         }
+        setTimeout(() => {
+            document.documentElement.classList.remove('theme-transition');
+        }, 300);
     }
 }">
     <div class="flex h-[100dvh] overflow-hidden">
@@ -216,26 +222,33 @@
                         <span>الأسئلة الشائعة</span>
                     </a>
                 @elseif(auth()->user()->isTeacher())
-                    <a href="{{ route('teacher.dashboard') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.dashboard') ? 'active-link' : '' }}">
-                        <i class="fa-solid fa-gauge-high ml-3 w-5 text-center"></i>
-                        <span>نظرة عامة</span>
-                    </a>
-                    <a href="{{ route('teacher.courses.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.courses.*') ? 'active-link' : '' }}">
-                        <i class="fa-solid fa-file-video ml-3 w-5 text-center"></i>
-                        <span>كورساتي</span>
-                    </a>
-                    <a href="{{ route('payments.teacher') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('payments.teacher') ? 'active-link' : '' }}">
-                        <i class="fa-solid fa-user-check ml-3 w-5 text-center"></i>
-                        <span>طلبات التفعيل</span>
-                    </a>
-                    <a href="{{ route('teacher.courses.create') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.courses.create') ? 'active-link' : '' }}">
-                        <i class="fa-solid fa-plus-circle ml-3 w-5 text-center"></i>
-                        <span>إضافة كورس</span>
-                    </a>
-                    <a href="{{ route('teacher.earnings.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.earnings.index') ? 'active-link' : '' }}">
-                        <i class="fa-solid fa-coins ml-3 w-5 text-center"></i>
-                        <span>الأرباح والعمولات</span>
-                    </a>
+                    @if(auth()->user()->is_approved)
+                        <a href="{{ route('teacher.dashboard') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.dashboard') ? 'active-link' : '' }}">
+                            <i class="fa-solid fa-gauge-high ml-3 w-5 text-center"></i>
+                            <span>نظرة عامة</span>
+                        </a>
+                        <a href="{{ route('teacher.courses.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.courses.*') ? 'active-link' : '' }}">
+                            <i class="fa-solid fa-file-video ml-3 w-5 text-center"></i>
+                            <span>كورساتي</span>
+                        </a>
+                        <a href="{{ route('payments.teacher') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('payments.teacher') ? 'active-link' : '' }}">
+                            <i class="fa-solid fa-user-check ml-3 w-5 text-center"></i>
+                            <span>طلبات التفعيل</span>
+                        </a>
+                        <a href="{{ route('teacher.courses.create') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.courses.create') ? 'active-link' : '' }}">
+                            <i class="fa-solid fa-plus-circle ml-3 w-5 text-center"></i>
+                            <span>إضافة كورس</span>
+                        </a>
+                        <a href="{{ route('teacher.earnings.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.earnings.index') ? 'active-link' : '' }}">
+                            <i class="fa-solid fa-coins ml-3 w-5 text-center"></i>
+                            <span>الأرباح والعمولات</span>
+                        </a>
+                    @else
+                        <a href="{{ route('teacher.pending') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.pending') ? 'active-link' : '' }}">
+                            <i class="fa-solid fa-clock ml-3 w-5 text-center"></i>
+                            <span>حالة الطلب</span>
+                        </a>
+                    @endif
 
                 @elseif(auth()->user()->isStudent())
                     <a href="{{ route('dashboard') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('dashboard') ? 'active-link' : '' }}">
@@ -292,7 +305,7 @@
 
                     <div class="flex flex-col text-left border-r border-gray-200 dark:border-white/10 pr-2 sm:pr-4 hidden sm:flex">
                         <span class="text-sm font-bold text-[var(--text-color)]">{{ auth()->user()->name }}</span>
-                        <span class="text-[10px] text-gray-500">{{ auth()->user()->role == 'admin' ? 'مدير النظام' : (auth()->user()->role == 'teacher' ? 'معلم معتمد' : 'طالب') }}</span>
+                        <span class="text-[10px] text-gray-500">{{ auth()->user()->role == 'admin' ? 'مدير النظام' : (auth()->user()->role == 'teacher' ? (auth()->user()->is_approved ? 'معلم معتمد' : 'معلم قيد المراجعة') : 'طالب') }}</span>
                     </div>
                     <div class="w-12 h-12 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-white/10">
                         @if(auth()->user()->avatar)
@@ -308,7 +321,7 @@
 
             <!-- Scrollable Content -->
              <main class="flex-1 overflow-y-auto p-4 pb-24 sm:p-8 sm:pb-8 relative scrollbar-hide">
-                <div class="max-w-7xl mx-auto page-fade-in w-full overflow-x-hidden">
+                <div class="max-w-7xl mx-auto w-full overflow-x-hidden">
                     @yield('content')
                 </div>
 

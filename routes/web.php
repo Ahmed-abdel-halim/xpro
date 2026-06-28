@@ -70,13 +70,23 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
 
 // Teacher Routes
 Route::prefix('teacher')->middleware(['auth', 'role:teacher'])->name('teacher.')->group(function () {
-    Route::get('/', [TeacherDashboard::class, 'index'])->name('dashboard');
-    Route::resource('courses', \App\Http\Controllers\Teacher\CourseController::class);
-    Route::resource('courses.lessons', \App\Http\Controllers\Teacher\LessonController::class);
+    Route::get('/pending', function () {
+        $user = auth()->user();
+        if ($user->is_approved) {
+            return redirect()->route('teacher.dashboard');
+        }
+        return view('teacher.pending');
+    })->name('pending');
 
-    Route::get('/earnings', [\App\Http\Controllers\Teacher\EarningsController::class, 'index'])->name('earnings.index');
-    Route::post('/earnings/settle', [\App\Http\Controllers\Teacher\EarningsController::class, 'settleCommission'])->name('earnings.settle');
-    Route::post('/withdrawals', [\App\Http\Controllers\Teacher\WithdrawalController::class, 'store'])->name('withdrawals.store');
+    Route::middleware(['teacher.approved'])->group(function () {
+        Route::get('/', [TeacherDashboard::class, 'index'])->name('dashboard');
+        Route::resource('courses', \App\Http\Controllers\Teacher\CourseController::class);
+        Route::resource('courses.lessons', \App\Http\Controllers\Teacher\LessonController::class);
+
+        Route::get('/earnings', [\App\Http\Controllers\Teacher\EarningsController::class, 'index'])->name('earnings.index');
+        Route::post('/earnings/settle', [\App\Http\Controllers\Teacher\EarningsController::class, 'settleCommission'])->name('earnings.settle');
+        Route::post('/withdrawals', [\App\Http\Controllers\Teacher\WithdrawalController::class, 'store'])->name('withdrawals.store');
+    });
 });
 
 
@@ -99,8 +109,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment/success/{payment}', [\App\Http\Controllers\PaymentController::class, 'paymentSuccess'])->name('payment.success');
     
     // Payment Dashboards
-    Route::get('/teacher/payments', [\App\Http\Controllers\PaymentController::class, 'teacherPayments'])->name('payments.teacher');
-    Route::post('/payment/{payment}/confirm', [\App\Http\Controllers\PaymentController::class, 'confirmPayment'])->name('payment.confirm');
+    Route::get('/teacher/payments', [\App\Http\Controllers\PaymentController::class, 'teacherPayments'])->name('payments.teacher')->middleware('teacher.approved');
+    Route::post('/payment/{payment}/confirm', [\App\Http\Controllers\PaymentController::class, 'confirmPayment'])->name('payment.confirm')->middleware('teacher.approved');
     Route::get('/student/payments', [\App\Http\Controllers\PaymentController::class, 'studentPayments'])->name('payments.student');
 });
 

@@ -9,17 +9,30 @@
     isEmbed(url) {
         if (!url) return false;
         const low = url.toLowerCase();
-        return low.includes('youtube.com') || low.includes('youtu.be') || low.includes('vimeo.com');
+        return low.includes('youtube.com') || 
+               low.includes('youtu.be') || 
+               low.includes('vimeo.com') || 
+               low.includes('drive.google.com/file/d/') ||
+               low.includes('embed') || 
+               low.includes('iframe') || 
+               low.includes('player.');
     },
     isVideo(url) {
         if (!url) return false;
+        // Strip query parameters and hashes for checking extension
+        const cleanUrl = url.split('?')[0].split('#')[0].toLowerCase();
         const exts = ['.mp4', '.mov', '.webm', '.ogg', '.m4v', '.mkv', '.avi'];
-        return exts.some(ext => url.toLowerCase().endsWith(ext));
+        return exts.some(ext => cleanUrl.endsWith(ext));
     },
     isAudio(url) {
         if (!url) return false;
         const exts = ['.mp3', '.wav', '.m4a', '.ogg'];
         return exts.some(ext => url.toLowerCase().endsWith(ext));
+    },
+    isGooglePhotos(url) {
+        if (!url) return false;
+        const low = url.toLowerCase();
+        return low.includes('photos.app.goo.gl') || low.includes('photos.google.com');
     },
     getEmbedUrl(url) {
         if (url.includes('youtube.com/watch')) {
@@ -33,6 +46,10 @@
         if (url.includes('vimeo.com/')) {
             const videoId = url.split('vimeo.com/')[1].split('?')[0];
             return 'https://player.vimeo.com/video/' + videoId + '?autoplay=1&badge=0&byline=0&portrait=0&title=0';
+        }
+        if (url.includes('drive.google.com/file/d/')) {
+            const fileId = url.split('drive.google.com/file/d/')[1].split('/')[0];
+            return 'https://drive.google.com/file/d/' + fileId + '/preview';
         }
         return url;
     },
@@ -165,8 +182,31 @@
                         </div>
                     </template>
 
+                    <!-- Google Photos (Direct play card since embedding is blocked by Google) -->
+                    <template x-if="activeVideo && isGooglePhotos(activeVideo)">
+                        <div class="p-12 text-center bg-gray-50 dark:bg-[#0b1121] rounded-2xl border border-[#00555A]/5 dark:border-white/5 flex flex-col items-center">
+                            <div class="mb-6 relative group cursor-pointer" @click="window.open(activeVideo, '_blank')">
+                                <!-- Mock video frame with play button -->
+                                <div class="w-72 max-w-full aspect-video bg-gray-900 rounded-2xl flex items-center justify-center border border-gray-700 relative overflow-hidden group-hover:border-amber-500 dark:group-hover:border-sky-500 transition-colors duration-300">
+                                    <div class="absolute inset-0 bg-cover bg-center opacity-30 blur-sm" style="background-image: url('{{ $course->thumbnail ?? 'https://placehold.co/1200x675/0f172a/38bdf8?text=Course+Preview' }}')"></div>
+                                    <div class="w-16 h-16 bg-amber-500 dark:bg-sky-500 text-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 relative z-10">
+                                        <i class="fa-solid fa-play text-2xl ml-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-[var(--text-color)] dark:text-white">مشاهدة الدرس على Google Photos</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-6 max-w-md ml-auto mr-auto text-sm leading-relaxed">
+                                هذا الدرس مرفوع كفيديو على Google Photos. نظراً لقيود الأمان والحماية الخاصة بجوجل، يرجى فتح وتشغيل الفيديو في نافذة جديدة للمشاهدة.
+                            </p>
+                            <a x-bind:href="activeVideo" target="_blank" class="px-8 py-3 bg-amber-500 hover:bg-amber-600 dark:bg-sky-500 dark:hover:bg-sky-600 transition-all duration-300 rounded-xl text-white font-bold flex items-center shadow-lg shadow-amber-500/20 dark:shadow-sky-500/20 hover:-translate-y-1">
+                                <i class="fa-solid fa-arrow-up-right-from-square ml-3"></i>
+                                تشغيل الفيديو في نافذة جديدة
+                            </a>
+                        </div>
+                    </template>
+
                     <!-- Other Types (PDF/Documents/RAR) -->
-                    <template x-if="activeVideo && !isEmbed(activeVideo) && !isVideo(activeVideo) && !isAudio(activeVideo)">
+                    <template x-if="activeVideo && !isEmbed(activeVideo) && !isVideo(activeVideo) && !isAudio(activeVideo) && !isGooglePhotos(activeVideo)">
                         <div class="p-20 text-center bg-gray-50 dark:bg-[#0b1121] rounded-2xl border border-[#00555A]/5 dark:border-white/5 flex flex-col items-center">
                             <div class="mb-6 text-amber-500 dark:text-sky-400 text-6xl drop-shadow-lg shadow-amber-500/20 dark:shadow-sky-500/20">
                                 <i class="fa-solid fa-file-circle-check"></i>
