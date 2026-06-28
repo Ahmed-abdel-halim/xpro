@@ -16,13 +16,17 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        if (\Illuminate\Support\Facades\Schema::hasTable('stages')) {
-            \Illuminate\Support\Facades\View::share('all_stages', \App\Models\Stage::all());
-        }
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('stages')) {
+                \Illuminate\Support\Facades\View::share('all_stages', \App\Models\Stage::all());
+            }
 
-        if (\Illuminate\Support\Facades\Schema::hasTable('settings')) {
-            $settings = \App\Models\Setting::all()->pluck('value', 'key')->toArray();
-            \Illuminate\Support\Facades\View::share('settings', $settings);
+            if (\Illuminate\Support\Facades\Schema::hasTable('settings')) {
+                $settings = \App\Models\Setting::all()->pluck('value', 'key')->toArray();
+                \Illuminate\Support\Facades\View::share('settings', $settings);
+            }
+        } catch (\Throwable $e) {
+            // Prevent failure during composer install or artisan commands before database is set up
         }
     }
 
