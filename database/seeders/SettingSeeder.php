@@ -13,11 +13,6 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $settings = [
-            // Social Media
-            ['key' => 'social_facebook', 'value' => 'https://www.facebook.com/stan.ley.875466', 'group' => 'social'],
-            ['key' => 'social_instagram', 'value' => 'https://www.instagram.com/mhmd_abdelmoniem?igsh=eHh3bzluMnhhYmQ0', 'group' => 'social'],
-            ['key' => 'social_youtube', 'value' => '', 'group' => 'social'],
-            ['key' => 'social_twitter', 'value' => '', 'group' => 'social'],
             
             // Contact Info
             ['key' => 'contact_phone', 'value' => '01551322666', 'group' => 'contact'],
