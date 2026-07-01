@@ -127,7 +127,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <!-- Main Content -->
         <div class="lg:col-span-2 space-y-8">
-            <div class="bg-white dark:bg-[#141c2f] border border-[#00555A]/10 dark:border-white/10 p-2 rounded-3xl overflow-hidden min-h-[400px] flex flex-col justify-center shadow-2xl shadow-amber-500/5 dark:shadow-none">
+            <div :class="activeVideo ? 'p-0 bg-black' : 'bg-white dark:bg-[#141c2f] p-2 min-h-[350px] md:min-h-[400px] flex flex-col justify-center'" class="border border-[#00555A]/10 dark:border-white/10 rounded-3xl overflow-hidden shadow-2xl shadow-amber-500/5 dark:shadow-none transition-all duration-300">
                 <!-- Video Player Area -->
                 <div x-show="activeVideo" class="w-full h-full relative" style="display: none;" x-effect="initPlayer()" 
                      x-data="{ 
