@@ -17,6 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\RoleMiddleware::class,
             'teacher.approved' => \App\Http\Middleware\TeacherApprovedMiddleware::class,
         ]);
+
+        $middleware->appendToGroup('web', \App\Http\Middleware\CheckSingleSession::class);
         
         $middleware->validateCsrfTokens(except: [
             '/payment/webhook',

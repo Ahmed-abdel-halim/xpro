@@ -24,6 +24,7 @@ class User extends Authenticatable
         'is_free_trial_enabled',
         'payout_method',
         'payout_details',
+        'last_session_id',
     ];
 
     public function isAdmin() { return $this->role === 'admin'; }
