@@ -249,12 +249,9 @@
                             <p class="text-xs text-gray-500 mt-2">لديك عملية دفع قيد المراجعة. سيقوم المدرس بتأكيد الدفع قريباً.</p>
                         @else
                             <div class="space-y-3 w-full max-w-sm">
-                                <a href="{{ route('payment.traditional', $course->id) }}" class="w-full py-3 md:py-4 rounded-xl bg-amber-500 hover:bg-amber-600 dark:bg-sky-500 dark:hover:bg-sky-600 transition-all duration-300 hover:-translate-y-1 text-white font-bold text-sm md:text-base flex items-center justify-center gap-2 shadow-xl shadow-amber-500/20 dark:shadow-sky-500/20 border border-amber-600 dark:border-sky-400/50">
-                                    <i class="fa-solid fa-money-bill-transfer"></i> الدفع التقليدي مقابل {{ number_format($course->price, 2) }} ج.م
-                                </a>
-                                <p class="text-[10px] md:text-xs text-gray-500 text-center">
-                                    الدفع مباشرة للمدرس عبر التحويل البنكي أو المحافظ الإلكترونية
-                                </p>
+                                <button @click="showPaymentModal = true" class="w-full py-3 md:py-4 rounded-xl bg-amber-500 hover:bg-amber-600 dark:bg-sky-500 dark:hover:bg-sky-600 transition-all duration-300 hover:-translate-y-1 text-white font-bold text-sm md:text-base flex items-center justify-center gap-2 shadow-xl shadow-amber-500/20 dark:shadow-sky-500/20 border border-amber-600 dark:border-sky-400/50">
+                                    <i class="fa-solid fa-unlock-keyhole"></i> اشترك الآن لتفعيل الكورس
+                                </button>
                             </div>
                         @endif
                     </div>
