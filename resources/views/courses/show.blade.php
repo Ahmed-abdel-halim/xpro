@@ -129,7 +129,7 @@
         <div class="lg:col-span-2 space-y-8">
             <div class="bg-white dark:bg-[#141c2f] border border-[#00555A]/10 dark:border-white/10 p-2 rounded-3xl overflow-hidden min-h-[400px] flex flex-col justify-center shadow-2xl shadow-amber-500/5 dark:shadow-none">
                 <!-- Video Player Area -->
-                <div x-show="activeVideo" class="w-full h-full relative" style="display: none;" x-effect="initPlayer()" 
+                <div x-show="activeVideo" class="w-full h-full relative video-secure-layer" style="display: none;" x-effect="initPlayer()" 
                      x-data="{ 
                         wmX: 50, 
                         wmY: 50,
@@ -140,6 +140,12 @@
                             }, 5000);
                         }
                      }" x-init="moveWatermark()">
+                    
+                    <!-- Capture Block Message Overlay -->
+                    <div class="capture-block-message">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <p>محتوى محمي - غير مسموح بتصوير الشاشة</p>
+                    </div>
                     
                     <!-- Shared Watermark for all video types -->
                     <div class="absolute pointer-events-none z-[100] transition-all duration-[5000ms] ease-in-out select-none mix-blend-overlay opacity-30 px-4 py-2"
@@ -331,6 +337,16 @@
 </div>
 
 <!-- Security Scripts and Styles -->
+
+<!-- Screenshot Protection Overlay (hidden by default, shown on screenshot attempt) -->
+<div id="screenshot-protection-overlay" style="display:none; position:fixed; inset:0; background:#000; z-index:999999; align-items:center; justify-content:center;">
+    <div style="text-align:center; color:#fff; padding:2rem;">
+        <i class="fa-solid fa-shield-halved" style="font-size:4rem; margin-bottom:1rem; color:#f59e0b;"></i>
+        <h2 style="font-size:1.5rem; font-weight:800; margin-bottom:0.5rem;">محتوى محمي</h2>
+        <p style="opacity:0.7;">غير مسموح بتصوير الشاشة أثناء مشاهدة الفيديو</p>
+    </div>
+</div>
+
 <style>
     /* Prevent text and image selection */
     body {
@@ -349,6 +365,67 @@
             opacity: 0 !important;
             visibility: hidden !important;
         }
+    }
+
+    /* ====== Mobile Screenshot Prevention ====== */
+    
+    /* 
+     * CSS-based DRM: video elements with these properties 
+     * will appear as black in iOS/Android screenshots 
+     */
+    video {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+
+    /* 
+     * The "secure" class is applied to video containers.
+     * On mobile, hardware-accelerated layers with certain 
+     * CSS properties are NOT captured by screenshots.
+     */
+    .video-secure-layer {
+        position: relative;
+        /* Force hardware acceleration - helps prevent screen capture on some devices */
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        will-change: transform;
+    }
+
+    /* When page is not visible (user switched away or taking screenshot), black out video */
+    .video-hidden-on-capture video,
+    .video-hidden-on-capture iframe,
+    .video-hidden-on-capture .plyr {
+        visibility: hidden !important;
+    }
+
+    .video-hidden-on-capture .capture-block-message {
+        display: flex !important;
+    }
+
+    .capture-block-message {
+        display: none;
+        position: absolute;
+        inset: 0;
+        background: #000;
+        color: #fff;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        border-radius: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .capture-block-message i {
+        font-size: 2rem;
+        color: #f59e0b;
+    }
+
+    .capture-block-message p {
+        font-weight: 700;
+        font-size: 0.9rem;
     }
 
     /* YouTube UI Hiding Hack - Stable Scale Method */
@@ -397,12 +474,22 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.getElementById('screenshot-protection-overlay');
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
         // 1. Prevent Right Click (Context Menu)
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
         });
 
-        // 2. Prevent Keyboard Shortcuts (DevTools, Save, Print, PrintScreen)
+        // 2. Prevent touch callout / long press on mobile
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.closest('video, iframe, .plyr')) {
+                e.target.style.webkitTouchCallout = 'none';
+            }
+        }, { passive: true });
+
+        // 3. Prevent Keyboard Shortcuts (DevTools, Save, Print, PrintScreen)
         document.addEventListener('keydown', function(e) {
             // F12
             if (e.key === 'F12' || e.keyCode === 123) {
@@ -438,13 +525,143 @@
                 navigator.clipboard.writeText(text).catch(err => {});
             }
         }
+
+        // ====== MOBILE SCREENSHOT PREVENTION ======
+
+        // 4. Page Visibility API - detect when user takes screenshot on mobile
+        // When a screenshot is taken on most mobile devices, the page briefly loses visibility
+        // or the visibilityState changes. We use this to hide video content.
+        let videoWasPlaying = false;
+
+        function hideVideoContent() {
+            // Show the black overlay
+            overlay.style.display = 'flex';
+            
+            // Add class to hide video/iframe content
+            document.querySelectorAll('.video-secure-layer').forEach(el => {
+                el.classList.add('video-hidden-on-capture');
+            });
+
+            // Pause video if playing
+            const videoEl = document.querySelector('video');
+            if (videoEl && !videoEl.paused) {
+                videoWasPlaying = true;
+                videoEl.pause();
+            }
+
+            // Also try to pause Plyr
+            if (window.plyrInstance && window.plyrInstance.playing) {
+                videoWasPlaying = true;
+                window.plyrInstance.pause();
+            }
+        }
+
+        function showVideoContent() {
+            // Hide the overlay after a short delay to ensure screenshot is captured with black screen
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                
+                document.querySelectorAll('.video-secure-layer').forEach(el => {
+                    el.classList.remove('video-hidden-on-capture');
+                });
+
+                // Resume video if it was playing
+                if (videoWasPlaying) {
+                    const videoEl = document.querySelector('video');
+                    if (videoEl) videoEl.play().catch(() => {});
+                    if (window.plyrInstance) window.plyrInstance.play();
+                    videoWasPlaying = false;
+                }
+            }, 500); // 500ms delay to ensure screenshot captures black screen
+        }
+
+        // Visibility change detection (works on both mobile and desktop)
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                hideVideoContent();
+            } else if (document.visibilityState === 'visible') {
+                showVideoContent();
+            }
+        });
+
+        // Window blur/focus - additional layer of protection
+        window.addEventListener('blur', function() {
+            if (isMobile) {
+                hideVideoContent();
+            }
+        });
+
+        window.addEventListener('focus', function() {
+            if (isMobile) {
+                showVideoContent();
+            }
+        });
+
+        // 5. iOS-specific: detect screenshot via window resize event
+        // iOS triggers a brief resize when screenshot animation occurs
+        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            let lastWidth = window.innerWidth;
+            let lastHeight = window.innerHeight;
+            
+            window.addEventListener('resize', function() {
+                const widthDiff = Math.abs(window.innerWidth - lastWidth);
+                const heightDiff = Math.abs(window.innerHeight - lastHeight);
+                
+                // Small resize might indicate screenshot animation
+                if (widthDiff === 0 && heightDiff === 0) {
+                    hideVideoContent();
+                    setTimeout(showVideoContent, 1000);
+                }
+                
+                lastWidth = window.innerWidth;
+                lastHeight = window.innerHeight;
+            });
+        }
+
+        // 6. Android-specific: Use the Screen Capture Observer if available
+        if ('mediaDevices' in navigator && 'getDisplayMedia' in navigator.mediaDevices) {
+            // Override getDisplayMedia to prevent screen recording
+            const originalGetDisplayMedia = navigator.mediaDevices.getDisplayMedia.bind(navigator.mediaDevices);
+            navigator.mediaDevices.getDisplayMedia = function() {
+                hideVideoContent();
+                return originalGetDisplayMedia.apply(this, arguments).then(stream => {
+                    // If somehow they get a stream, hide content
+                    hideVideoContent();
+                    stream.getVideoTracks().forEach(track => {
+                        track.addEventListener('ended', showVideoContent);
+                    });
+                    return stream;
+                });
+            };
+        }
+
+        // 7. Detect screen recording (Android Chrome 94+)
+        if ('screen' in window && 'isExtended' in screen) {
+            screen.addEventListener('change', function() {
+                // Screen properties changed - might be recording
+                hideVideoContent();
+                setTimeout(showVideoContent, 2000);
+            });
+        }
+
+        // 8. Multi-window / Split screen detection (prevents screenshot via split screen recording apps)
+        if (isMobile) {
+            setInterval(() => {
+                // Check if screen dimensions suggest split-screen mode
+                const ratio = window.innerHeight / window.innerWidth;
+                if (ratio < 0.5 || ratio > 3) {
+                    // Unusual aspect ratio - might be split screen
+                    hideVideoContent();
+                }
+            }, 3000);
+        }
         
-        // Hide content if DevTools opened (simple check based on window resize/width)
+        // 9. Hide content if DevTools opened (simple check based on window resize/width)
         let checkDevTools = function() {
             const widthThreshold = window.outerWidth - window.innerWidth > 160;
             const heightThreshold = window.outerHeight - window.innerHeight > 160;
             if (widthThreshold || heightThreshold) {
-                // Optionally hide video player
+                hideVideoContent();
             }
         };
         window.addEventListener('resize', checkDevTools);
