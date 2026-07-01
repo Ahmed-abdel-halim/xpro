@@ -228,28 +228,31 @@
                 </div>
 
                 <!-- Default Locked Area -->
-                <div x-show="!activeVideo && !{{ $isEnrolled ? 'true' : 'false' }}" class="relative rounded-2xl overflow-hidden" @if($isEnrolled) style="display: none;" @endif>
+                <div x-show="!activeVideo && !{{ $isEnrolled ? 'true' : 'false' }}" class="relative rounded-2xl overflow-hidden min-h-[350px] md:min-h-[400px] flex flex-col justify-center" @if($isEnrolled) style="display: none;" @endif>
+                    <!-- Blurred Background Image -->
                     <img src="{{ $course->thumbnail ?? 'https://placehold.co/1200x675/0f172a/38bdf8?text=Course+Preview' }}" 
-                         alt="Preview" class="w-full h-auto opacity-80 dark:opacity-50 blur-sm scale-110">
-                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-white/60 dark:bg-[#141c2f]/80 backdrop-blur-md">
+                         alt="Preview" class="absolute inset-0 w-full h-full object-cover opacity-80 dark:opacity-50 blur-sm scale-110">
+                    
+                    <!-- Content Overlay -->
+                    <div class="relative z-10 flex flex-col items-center justify-center text-center p-6 md:p-8 bg-white/70 dark:bg-[#141c2f]/85 backdrop-blur-md min-h-[350px] md:min-h-[400px] w-full">
                         <div class="text-5xl mb-4 text-red-500 drop-shadow-lg">
                             <i class="fa-solid fa-lock"></i>
                         </div>
 
-                        <h2 class="text-3xl font-black mb-4 text-[var(--text-color)] dark:text-white">المحتوى مغلق</h2>
-                        <p class="text-gray-700 dark:text-gray-300 font-medium mb-6">يجب الاشتراك في الكورس لتتمكن من مشاهدة الفيديوهات</p>
+                        <h2 class="text-2xl md:text-3xl font-black mb-3 text-[var(--text-color)] dark:text-white">المحتوى مغلق</h2>
+                        <p class="text-gray-700 dark:text-gray-300 font-medium mb-6 text-sm md:text-base">يجب الاشتراك في الكورس لتتمكن من مشاهدة الفيديوهات</p>
                         
                         @if($hasPending)
-                            <div class="px-8 py-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-bold text-lg inline-flex items-center gap-2">
+                            <div class="px-6 py-3 md:px-8 md:py-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-bold text-base md:text-lg inline-flex items-center gap-2">
                                 <i class="fa-solid fa-clock-rotate-left"></i> بانتظار تأكيد الدفع...
                             </div>
                             <p class="text-xs text-gray-500 mt-2">لديك عملية دفع قيد المراجعة. سيقوم المدرس بتأكيد الدفع قريباً.</p>
                         @else
-                            <div class="space-y-3">
-                                <a href="{{ route('payment.traditional', $course->id) }}" class="px-8 py-4 rounded-xl bg-amber-500 hover:bg-amber-600 dark:bg-sky-500 dark:hover:bg-sky-600 transition-all duration-300 hover:-translate-y-1 text-white font-bold text-lg inline-flex items-center gap-2 shadow-xl shadow-amber-500/20 dark:shadow-sky-500/20 border border-amber-600 dark:border-sky-400/50">
+                            <div class="space-y-3 w-full max-w-sm">
+                                <a href="{{ route('payment.traditional', $course->id) }}" class="w-full py-3 md:py-4 rounded-xl bg-amber-500 hover:bg-amber-600 dark:bg-sky-500 dark:hover:bg-sky-600 transition-all duration-300 hover:-translate-y-1 text-white font-bold text-sm md:text-base flex items-center justify-center gap-2 shadow-xl shadow-amber-500/20 dark:shadow-sky-500/20 border border-amber-600 dark:border-sky-400/50">
                                     <i class="fa-solid fa-money-bill-transfer"></i> الدفع التقليدي مقابل {{ number_format($course->price, 2) }} ج.م
                                 </a>
-                                <p class="text-xs text-gray-500 text-center">
+                                <p class="text-[10px] md:text-xs text-gray-500 text-center">
                                     الدفع مباشرة للمدرس عبر التحويل البنكي أو المحافظ الإلكترونية
                                 </p>
                             </div>
@@ -584,19 +587,6 @@
             }
         });
 
-        // Window blur/focus - additional layer of protection
-        window.addEventListener('blur', function() {
-            if (isMobile) {
-                hideVideoContent();
-            }
-        });
-
-        window.addEventListener('focus', function() {
-            if (isMobile) {
-                showVideoContent();
-            }
-        });
-
         // 5. iOS-specific: detect screenshot via window resize event
         // iOS triggers a brief resize when screenshot animation occurs
         if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
@@ -643,20 +633,8 @@
                 setTimeout(showVideoContent, 2000);
             });
         }
-
-        // 8. Multi-window / Split screen detection (prevents screenshot via split screen recording apps)
-        if (isMobile) {
-            setInterval(() => {
-                // Check if screen dimensions suggest split-screen mode
-                const ratio = window.innerHeight / window.innerWidth;
-                if (ratio < 0.5 || ratio > 3) {
-                    // Unusual aspect ratio - might be split screen
-                    hideVideoContent();
-                }
-            }, 3000);
-        }
         
-        // 9. Hide content if DevTools opened (simple check based on window resize/width)
+        // 8. Hide content if DevTools opened (simple check based on window resize/width)
         let checkDevTools = function() {
             const widthThreshold = window.outerWidth - window.innerWidth > 160;
             const heightThreshold = window.outerHeight - window.innerHeight > 160;
