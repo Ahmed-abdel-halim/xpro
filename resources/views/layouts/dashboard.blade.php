@@ -235,6 +235,10 @@
                             <i class="fa-solid fa-user-check ml-3 w-5 text-center"></i>
                             <span>طلبات التفعيل</span>
                         </a>
+                        <a href="{{ route('teacher.enrollments.create') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.enrollments.create') ? 'active-link' : '' }}">
+                            <i class="fa-solid fa-user-plus ml-3 w-5 text-center"></i>
+                            <span>تفعيل كورس لطالب</span>
+                        </a>
                         <a href="{{ route('teacher.courses.create') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.courses.create') ? 'active-link' : '' }}">
                             <i class="fa-solid fa-plus-circle ml-3 w-5 text-center"></i>
                             <span>إضافة كورس</span>

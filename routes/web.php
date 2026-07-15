@@ -83,6 +83,9 @@ Route::prefix('teacher')->middleware(['auth', 'role:teacher'])->name('teacher.')
         Route::resource('courses', \App\Http\Controllers\Teacher\CourseController::class);
         Route::resource('courses.lessons', \App\Http\Controllers\Teacher\LessonController::class);
 
+        Route::get('/enrollments/create', [\App\Http\Controllers\Teacher\EnrollmentController::class, 'create'])->name('enrollments.create');
+        Route::post('/enrollments', [\App\Http\Controllers\Teacher\EnrollmentController::class, 'store'])->name('enrollments.store');
+
         Route::get('/earnings', [\App\Http\Controllers\Teacher\EarningsController::class, 'index'])->name('earnings.index');
         Route::post('/earnings/settle', [\App\Http\Controllers\Teacher\EarningsController::class, 'settleCommission'])->name('earnings.settle');
         Route::post('/withdrawals', [\App\Http\Controllers\Teacher\WithdrawalController::class, 'store'])->name('withdrawals.store');
