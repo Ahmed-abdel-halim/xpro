@@ -98,6 +98,7 @@
             border-left-color: #38bdf8 !important;
         }
         .nav-link {
+            color: var(--text-color);
             border-left: 4px solid transparent;
             transition: all 0.2s ease-in-out;
         }
