@@ -658,15 +658,6 @@
                         <ul class="space-y-4">
                             <li class="flex items-start gap-3">
                                 <div class="w-8 h-8 rounded-lg bg-amber-500/20 dark:bg-sky-500/20 flex items-center justify-center flex-shrink-0 mt-1">
-                                    <i class="fa-solid fa-phone text-amber-400 dark:text-sky-400 text-sm"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-300">الهاتف</p>
-                                    <p class="text-white font-black">{{ $settings['contact_phone'] ?? '01551322666' }}</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-lg bg-amber-500/20 dark:bg-sky-500/20 flex items-center justify-center flex-shrink-0 mt-1">
                                     <i class="fa-solid fa-envelope text-amber-400 dark:text-sky-400 text-sm"></i>
                                 </div>
                                 <div>
@@ -713,18 +704,5 @@
         </div>
     </footer>
     @stack('scripts')
-
-    <!-- Floating WhatsApp Button -->
-    @php
-        $whatsappNumber = $settings['contact_whatsapp'] ?? '201551322666';
-        $whatsappUrl = "https://wa.me/" . preg_replace('/[^0-9]/', '', $whatsappNumber) . "?text=" . urlencode("السلام عليكم، أود الاستفسار عن خدمات منصة Xpro");
-    @endphp
-    <a href="{{ $whatsappUrl }}" target="_blank" 
-       class="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-12 h-12 md:w-16 md:h-16 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-50 whatsapp-float" 
-       title="تواصل معنا عبر واتساب">
-        <i class="fa-brands fa-whatsapp text-2xl md:text-3xl"></i>
-        <span class="pulse-ripple"></span>
-        <div class="whatsapp-tooltip">تواصل معنا</div>
-    </a>
 </body>
 </html>
