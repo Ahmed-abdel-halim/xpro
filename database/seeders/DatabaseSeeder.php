@@ -15,19 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Primary Admin
-        $admin = User::updateOrCreate(
-            ['email' => 'admin@xpro.com'],
-            [
-                'name' => 'Admin User',
-                'password' => \Hash::make('password'),
-                'role' => 'admin',
-            ]
-        );
+        $this->call([
+            UserSeeder::class,
+        ]);
 
-        // Additional Admins
-        // (Removed factory calls to avoid Faker dependency in production)
-
+        $admin = User::where('role', 'admin')->first();
+        $teacher = User::where('role', 'teacher')->first() ?? $admin;
 
         // Stages
         $stages = [
@@ -75,7 +68,7 @@ class DatabaseSeeder extends Seeder
                             $course = \App\Models\Course::updateOrCreate(
                                 ['title' => 'دورة اللغة العربية التأسيسية'],
                                 [
-                                    'teacher_id' => $admin->id, // The admin user we created
+                                    'teacher_id' => $teacher->id, // The teacher user we created
                                     'subject_id' => $subject->id,
                                     'description' => 'شرح كامل ومبسط لقواعد اللغة العربية لطلاب الصف الأول الابتدائي.',
                                     'price' => 150.00,
