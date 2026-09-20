@@ -34,6 +34,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::resource('stages', \App\Http\Controllers\Admin\StageController::class);
     Route::resource('grades', \App\Http\Controllers\Admin\GradeController::class);
     Route::resource('subjects', \App\Http\Controllers\Admin\SubjectController::class);
+    Route::resource('specializations', \App\Http\Controllers\Admin\SpecializationController::class)->except(['create', 'show', 'edit']);
     Route::get('subjects/{subject}/courses', [\App\Http\Controllers\Admin\SubjectController::class, 'courses'])->name('subjects.courses');
     Route::delete('courses/{course}', [\App\Http\Controllers\Admin\CourseController::class, 'destroy'])->name('courses.destroy');
 

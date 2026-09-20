@@ -11,7 +11,8 @@ class UserController extends Controller
     public function teachers()
     {
         $teachers = User::where('role', 'teacher')->latest()->get();
-        return view('admin.users.teachers', compact('teachers'));
+        $specializations = \App\Models\Specialization::orderBy('name')->get();
+        return view('admin.users.teachers', compact('teachers', 'specializations'));
     }
 
     public function students()

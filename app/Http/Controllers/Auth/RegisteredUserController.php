@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use App\Models\Specialization;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -21,8 +23,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $subjects = Subject::select('name')->distinct()->orderBy('name')->pluck('name');
-        return view('auth.register', compact('subjects'));
+        $specializations = Specialization::orderBy('name')->get();
+        return view('auth.register', compact('specializations'));
     }
 
     /**

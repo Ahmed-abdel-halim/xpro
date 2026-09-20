@@ -206,6 +206,10 @@
                         <i class="fa-solid fa-user-tie ml-3 w-5 text-center"></i>
                         <span>الأساتذة</span>
                     </a>
+                    <a href="{{ route('admin.specializations.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('admin.specializations.*') ? 'active-link' : '' }}">
+                        <i class="fa-solid fa-shapes ml-3 w-5 text-center text-amber-500"></i>
+                        <span>إدارة الاختصاصات</span>
+                    </a>
                     <a href="{{ route('admin.students.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('admin.students.*') ? 'active-link' : '' }}">
                         <i class="fa-solid fa-user-graduate ml-3 w-5 text-center"></i>
                         <span>الطلاب</span>

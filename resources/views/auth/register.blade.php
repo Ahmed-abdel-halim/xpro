@@ -41,15 +41,15 @@
                     </label>
                     <select name="specialization"
                             class="w-full bg-white dark:bg-[#141c2f] border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-[var(--text-color)] dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-purple-500 focus:ring-2 focus:ring-amber-500/20 transition shadow-sm font-bold">
-                        <option value="">-- اختر مادة الاختصاص --</option>
+                        <option value="">-- اختر مادة الاختصاص المحددة من الإدارة --</option>
                         @php
-                            $defaultSubjects = ['رياضيات', 'فيزياء', 'كيمياء', 'إنكليزي', 'أحياء', 'اللغة العربية', 'إسلامية', 'اجتماعيات'];
-                            $availableSubjects = !empty($subjects) && count($subjects) ? $subjects->toArray() : $defaultSubjects;
-                            $allSubjects = array_unique(array_merge($defaultSubjects, $availableSubjects));
+                            $specs = isset($specializations) && $specializations->count() 
+                                ? $specializations 
+                                : \App\Models\Specialization::orderBy('name')->get();
                         @endphp
-                        @foreach($allSubjects as $subName)
-                            <option value="{{ $subName }}" {{ old('specialization') == $subName ? 'selected' : '' }}>
-                                {{ $subName }}
+                        @foreach($specs as $spec)
+                            <option value="{{ $spec->name }}" {{ old('specialization') == $spec->name ? 'selected' : '' }}>
+                                {{ $spec->name }}
                             </option>
                         @endforeach
                     </select>

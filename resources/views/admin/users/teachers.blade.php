@@ -19,10 +19,16 @@
             <h1 class="text-3xl font-bold text-[var(--text-color)] dark:text-white mb-2">الأساتذة</h1>
             <p class="text-gray-500">إدارة أساتذة المنصة، وتحديد اختصاصاتهم، وإضافة أساتذة جدد وتعديل بياناتهم.</p>
         </div>
-        <button @click="showAddModal = true" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-bold text-sm rounded-2xl transition flex items-center gap-2 shadow-lg shadow-amber-500/20 dark:shadow-sky-500/20">
-            <i class="fa-solid fa-user-plus"></i>
-            <span>إضافة أستاذ جديد</span>
-        </button>
+        <div class="flex items-center gap-3">
+            <a href="{{ route('admin.specializations.index') }}" class="px-5 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-white/5 dark:hover:bg-white/10 text-[var(--text-color)] dark:text-white font-bold text-sm rounded-2xl transition flex items-center gap-2 border border-gray-200 dark:border-white/10">
+                <i class="fa-solid fa-shapes text-amber-500"></i>
+                <span>إدارة الاختصاصات</span>
+            </a>
+            <button @click="showAddModal = true" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-bold text-sm rounded-2xl transition flex items-center gap-2 shadow-lg shadow-amber-500/20 dark:shadow-sky-500/20">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>إضافة أستاذ جديد</span>
+            </button>
+        </div>
     </div>
 
     <!-- Table -->
@@ -156,8 +162,15 @@
 
                         <div>
                             <label class="block mb-1 text-xs text-gray-500 font-bold">الاختصاص (المادة الدراسية)</label>
-                            <input type="text" name="specialization" placeholder="مثال: رياضيات، كيمياء، فيزياء، إنكليزي"
-                                   class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 transition">
+                            <select name="specialization"
+                                    class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 transition font-bold">
+                                <option value="">-- بدون اختصاص محدد --</option>
+                                @if(isset($specializations))
+                                    @foreach($specializations as $sp)
+                                        <option value="{{ $sp->name }}">{{ $sp->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -234,8 +247,15 @@
 
                         <div>
                             <label class="block mb-1 text-xs text-gray-500 font-bold">الاختصاص (المادة الدراسية)</label>
-                            <input type="text" name="specialization" x-model="editTeacher.specialization" placeholder="مثال: رياضيات، فيزياء..."
-                                   class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-sky-500 transition">
+                            <select name="specialization" x-model="editTeacher.specialization"
+                                    class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-sky-500 transition font-bold">
+                                <option value="">-- بدون اختصاص محدد --</option>
+                                @if(isset($specializations))
+                                    @foreach($specializations as $sp)
+                                        <option value="{{ $sp->name }}">{{ $sp->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

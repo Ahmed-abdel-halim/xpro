@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            SpecializationSeeder::class,
         ]);
 
         $admin = User::where('role', 'admin')->first();
