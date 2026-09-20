@@ -40,7 +40,13 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     
     // User Management
     Route::get('/teachers', [\App\Http\Controllers\Admin\UserController::class, 'teachers'])->name('teachers.index');
+    Route::post('/teachers', [\App\Http\Controllers\Admin\UserController::class, 'storeTeacher'])->name('teachers.store');
+    Route::put('/teachers/{user}', [\App\Http\Controllers\Admin\UserController::class, 'updateTeacher'])->name('teachers.update');
+    
     Route::get('/students', [\App\Http\Controllers\Admin\UserController::class, 'students'])->name('students.index');
+    Route::post('/students', [\App\Http\Controllers\Admin\UserController::class, 'storeStudent'])->name('students.store');
+    Route::put('/students/{user}', [\App\Http\Controllers\Admin\UserController::class, 'updateStudent'])->name('students.update');
+
     Route::post('/users/{user}/approve', [\App\Http\Controllers\Admin\UserController::class, 'approveTeacher'])->name('users.approve');
     Route::patch('/users/{user}/settings', [\App\Http\Controllers\Admin\UserController::class, 'updateTeacherSettings'])->name('users.updateSettings');
     Route::delete('/users/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
