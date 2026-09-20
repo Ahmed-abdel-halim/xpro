@@ -666,9 +666,9 @@
                 </p>
                 <p class="text-gray-400 text-sm mb-4 border-b border-gray-700 pb-4">
                     تم التصميم والتطوير بواسطة 
-                    <a href="https://www.facebook.com/profile.php?id=100072479525246" target="_blank" class="text-amber-400 hover:text-amber-300 dark:text-sky-400 dark:hover:text-sky-300 transition-colors duration-300">
-                        Codinity Tech
-                    </a>
+                    <span class="text-amber-400 dark:text-sky-400 font-black">
+                        Tulip Software Solutions
+                    </span>
                 </p>
                 <div class="flex flex-wrap justify-center items-center gap-6 text-sm">
                     <a href="{{ route('privacy-policy') }}" class="text-gray-400 hover:text-amber-400 dark:hover:text-sky-400 transition-colors duration-300">
