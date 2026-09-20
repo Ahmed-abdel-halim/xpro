@@ -7,7 +7,7 @@
 <div class="mb-8 flex justify-between items-center">
     <div>
         <h1 class="text-3xl font-bold text-[var(--text-color)] dark:text-white mb-2">كورسات مادة: {{ $subject->name }}</h1>
-        <p class="text-gray-500">عرض جميع الكورسات المتاحة لهذه المادة والمعلمين القائمين عليها.</p>
+        <p class="text-gray-500">عرض جميع الكورسات المتاحة لهذه المادة والأساتذة القائمين عليها.</p>
     </div>
     <a href="{{ route('admin.subjects.index') }}" class="px-6 py-2 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition rounded-xl text-[var(--text-color)] dark:text-white font-bold text-sm border border-gray-200 dark:border-white/10">
         <i class="fa-solid fa-arrow-right ml-2"></i> العودة للمواد

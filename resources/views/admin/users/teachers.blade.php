@@ -1,13 +1,13 @@
 @extends('layouts.dashboard')
 
-@section('title', 'إدارة المعلمين')
-@section('page-title', 'قائمة المعلمين')
+@section('title', 'إدارة الأساتذة')
+@section('page-title', 'قائمة الأساتذة')
 
 @section('content')
 <div x-data="{ 
     showAddModal: false, 
     showEditModal: false,
-    editTeacher: { id: '', name: '', email: '', phone: '', commission: 20, is_approved: true },
+    editTeacher: { id: '', name: '', email: '', phone: '', specialization: '', commission: 20, is_approved: true },
     openEdit(t) {
         this.editTeacher = { ...t };
         this.showEditModal = true;
@@ -16,12 +16,12 @@
     <!-- Header -->
     <div class="mb-8 flex flex-wrap justify-between items-center gap-4">
         <div>
-            <h1 class="text-3xl font-bold text-[var(--text-color)] dark:text-white mb-2">المعلمون</h1>
-            <p class="text-gray-500">إدارة المعلمين، إضافة معلمين جدد، وتعديل بياناتهم وصلاحياتهم.</p>
+            <h1 class="text-3xl font-bold text-[var(--text-color)] dark:text-white mb-2">الأساتذة</h1>
+            <p class="text-gray-500">إدارة أساتذة المنصة، وتحديد اختصاصاتهم، وإضافة أساتذة جدد وتعديل بياناتهم.</p>
         </div>
         <button @click="showAddModal = true" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-bold text-sm rounded-2xl transition flex items-center gap-2 shadow-lg shadow-amber-500/20 dark:shadow-sky-500/20">
             <i class="fa-solid fa-user-plus"></i>
-            <span>إضافة معلم جديد</span>
+            <span>إضافة أستاذ جديد</span>
         </button>
     </div>
 
@@ -31,7 +31,8 @@
             <table class="w-full text-right text-sm">
                 <thead>
                     <tr class="bg-gray-50 dark:bg-white/5 text-gray-500">
-                        <th class="p-4 font-bold border-b border-gray-100 dark:border-transparent">المعلم</th>
+                        <th class="p-4 font-bold border-b border-gray-100 dark:border-transparent">الأستاذ</th>
+                        <th class="p-4 font-bold border-b border-gray-100 dark:border-transparent">الاختصاص (المادة)</th>
                         <th class="p-4 font-bold border-b border-gray-100 dark:border-transparent">رقم الهاتف</th>
                         <th class="p-4 font-bold border-b border-gray-100 dark:border-transparent">البريد الإلكتروني</th>
                         <th class="p-4 font-bold border-b border-gray-100 dark:border-transparent text-center">نسبة العمولة</th>
@@ -52,6 +53,17 @@
                                     <span class="text-xs text-gray-400">انضم: {{ $teacher->created_at->format('Y/m/d') }}</span>
                                 </div>
                             </div>
+                        </td>
+
+                        <td class="p-4 font-bold">
+                            @if($teacher->specialization)
+                                <span class="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-600 dark:bg-sky-500/10 dark:text-sky-400 text-xs inline-flex items-center gap-1">
+                                    <i class="fa-solid fa-book-open text-[10px]"></i>
+                                    {{ $teacher->specialization }}
+                                </span>
+                            @else
+                                <span class="text-gray-400 text-xs">غير محدد</span>
+                            @endif
                         </td>
                         
                         <td class="p-4 text-gray-500 dark:text-gray-400 font-medium">
@@ -76,7 +88,7 @@
                         <td class="p-4 text-center">
                             <div class="flex items-center justify-center space-x-2 space-x-reverse">
                                 @if(!$teacher->is_approved)
-                                    <button type="button" onclick="document.getElementById('approve-form-{{ $teacher->id }}').submit()" class="px-2.5 py-1.5 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-600 hover:text-white rounded-lg text-xs font-bold transition" title="اعتماد المعلم">
+                                    <button type="button" onclick="document.getElementById('approve-form-{{ $teacher->id }}').submit()" class="px-2.5 py-1.5 bg-emerald-500/10 hover:bg-emerald-500 text-emerald-600 hover:text-white rounded-lg text-xs font-bold transition" title="اعتماد الأستاذ">
                                         <i class="fa-solid fa-check ml-1"></i> اعتماد
                                     </button>
                                 @endif
@@ -88,15 +100,16 @@
                                             name: '{{ addslashes($teacher->name) }}',
                                             email: '{{ addslashes($teacher->email) }}',
                                             phone: '{{ addslashes($teacher->phone ?? '') }}',
+                                            specialization: '{{ addslashes($teacher->specialization ?? '') }}',
                                             commission: {{ (float)$teacher->commission_percentage }},
                                             is_approved: {{ $teacher->is_approved ? 'true' : 'false' }}
                                         })" 
-                                        class="p-2 hover:bg-sky-500/10 text-sky-500 rounded-lg transition" title="تعديل بيانات المعلم">
+                                        class="p-2 hover:bg-sky-500/10 text-sky-500 rounded-lg transition" title="تعديل بيانات الأستاذ">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
 
                                 <!-- زر الحذف -->
-                                <button type="button" onclick="if(confirm('هل أنت متأكد من حذف هذا المعلم؟ سيتم حذف دوراته أيضاً.')) document.getElementById('delete-form-{{ $teacher->id }}').submit()" class="p-2 hover:bg-red-500/10 rounded-lg text-red-500 transition" title="حذف">
+                                <button type="button" onclick="if(confirm('هل أنت متأكد من حذف هذا الأستاذ؟ سيتم حذف دوراته أيضاً.')) document.getElementById('delete-form-{{ $teacher->id }}').submit()" class="p-2 hover:bg-red-500/10 rounded-lg text-red-500 transition" title="حذف">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </div>
@@ -107,7 +120,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="p-8 text-center text-gray-400 font-bold">لا يوجد معلمون مسجلون حتى الآن.</td>
+                        <td colspan="7" class="p-8 text-center text-gray-400 font-bold">لا يوجد أساتذة مسجلون حتى الآن.</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -115,7 +128,7 @@
         </div>
     </div>
 
-    <!-- Modal إضافة معلم جديد -->
+    <!-- Modal إضافة أستاذ جديد -->
     <template x-teleport="body">
         <div x-show="showAddModal" 
              class="fixed inset-0 z-[100] overflow-y-auto bg-black/60 backdrop-blur-sm"
@@ -126,7 +139,7 @@
                     <div class="flex justify-between items-center mb-6 border-b border-gray-100 dark:border-white/5 pb-4">
                         <h3 class="text-xl font-bold text-[var(--text-color)] dark:text-white flex items-center gap-2">
                             <i class="fa-solid fa-user-plus text-amber-500 dark:text-sky-400"></i>
-                            <span>إضافة معلم جديد</span>
+                            <span>إضافة أستاذ جديد</span>
                         </h3>
                         <button @click="showAddModal = false" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition">
                             <i class="fa-solid fa-xmark text-lg"></i>
@@ -136,8 +149,14 @@
                     <form action="{{ route('admin.teachers.store') }}" method="POST" class="space-y-4">
                         @csrf
                         <div>
-                            <label class="block mb-1 text-xs text-gray-500 font-bold">اسم المعلم *</label>
+                            <label class="block mb-1 text-xs text-gray-500 font-bold">اسم الأستاذ *</label>
                             <input type="text" name="name" required placeholder="مثال: الأستاذ علي محمد"
+                                   class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 transition">
+                        </div>
+
+                        <div>
+                            <label class="block mb-1 text-xs text-gray-500 font-bold">الاختصاص (المادة الدراسية)</label>
+                            <input type="text" name="specialization" placeholder="مثال: رياضيات، كيمياء، فيزياء، إنكليزي"
                                    class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 transition">
                         </div>
 
@@ -169,12 +188,12 @@
 
                         <div class="flex items-center gap-2 pt-2">
                             <input type="checkbox" name="is_approved" id="add_is_approved" value="1" checked class="rounded border-gray-300 text-amber-500 focus:ring-amber-500">
-                            <label for="add_is_approved" class="text-xs font-bold text-gray-700 dark:text-gray-300">اعتماد المعلم فوراً وتفعيل حسابه</label>
+                            <label for="add_is_approved" class="text-xs font-bold text-gray-700 dark:text-gray-300">اعتماد الأستاذ فوراً وتفعيل حسابه</label>
                         </div>
 
                         <div class="flex gap-3 pt-4 border-t border-gray-100 dark:border-white/5">
                             <button type="submit" class="flex-1 py-3 bg-amber-500 hover:bg-amber-600 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-bold text-sm rounded-xl transition">
-                                <i class="fa-solid fa-check ml-1"></i> حفظ وإضافة المعلم
+                                <i class="fa-solid fa-check ml-1"></i> حفظ وإضافة الأستاذ
                             </button>
                             <button type="button" @click="showAddModal = false" class="px-5 py-3 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-700 dark:text-white font-bold text-sm rounded-xl transition">
                                 إلغاء
@@ -186,7 +205,7 @@
         </div>
     </template>
 
-    <!-- Modal تعديل بيانات المعلم -->
+    <!-- Modal تعديل بيانات الأستاذ -->
     <template x-teleport="body">
         <div x-show="showEditModal" 
              class="fixed inset-0 z-[100] overflow-y-auto bg-black/60 backdrop-blur-sm"
@@ -197,7 +216,7 @@
                     <div class="flex justify-between items-center mb-6 border-b border-gray-100 dark:border-white/5 pb-4">
                         <h3 class="text-xl font-bold text-[var(--text-color)] dark:text-white flex items-center gap-2">
                             <i class="fa-solid fa-user-pen text-sky-500"></i>
-                            <span>تعديل بيانات المعلم</span>
+                            <span>تعديل بيانات الأستاذ</span>
                         </h3>
                         <button @click="showEditModal = false" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition">
                             <i class="fa-solid fa-xmark text-lg"></i>
@@ -208,8 +227,14 @@
                         @csrf
                         @method('PUT')
                         <div>
-                            <label class="block mb-1 text-xs text-gray-500 font-bold">اسم المعلم *</label>
+                            <label class="block mb-1 text-xs text-gray-500 font-bold">اسم الأستاذ *</label>
                             <input type="text" name="name" required x-model="editTeacher.name"
+                                   class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-sky-500 transition">
+                        </div>
+
+                        <div>
+                            <label class="block mb-1 text-xs text-gray-500 font-bold">الاختصاص (المادة الدراسية)</label>
+                            <input type="text" name="specialization" x-model="editTeacher.specialization" placeholder="مثال: رياضيات، فيزياء..."
                                    class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-sky-500 transition">
                         </div>
 

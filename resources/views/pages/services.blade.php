@@ -25,7 +25,7 @@
         
         <!-- Enhanced Description -->
         <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
-            نقدم مجموعة شاملة من الخدمات التعليمية المصممة لتلبية جميع احتياجات الطلاب والمعلمين وأولياء الأمور، مع ضمان أعلى معايير الجودة والاحترافية.
+            نقدم مجموعة شاملة من الخدمات التعليمية المصممة لتلبية جميع احتياجات الطلاب والأساتذة وأولياء الأمور، مع ضمان أعلى معايير الجودة والاحترافية.
         </p>
     </div>
 </div>
@@ -51,7 +51,7 @@
             </div>
             <h3 class="text-xl font-black text-[#004d40] dark:text-white mb-3 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors text-center">دروس مباشرة</h3>
             <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-center">
-                فصول دراسية تفاعلية مباشرة مع أفضل المعلمين، مع إمكانية التفاعل والطرح الأسئلة
+                فصول دراسية تفاعلية مباشرة مع أفضل الأساتذة، مع إمكانية التفاعل والطرح الأسئلة
             </p>
         </div>
 

@@ -30,7 +30,7 @@
                 
                 <!-- Enhanced Description -->
                 <p class="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-2xl leading-relaxed font-medium">
-                    نؤمن بقدرة كل طالب على التفوق. منصة Education توفر لك بيئة تعليمية متكاملة تجمع بين المعلمين الخبراء، المحتوى التفاعلي، والتقنيات الحديثة لضمان تحقيق أهدافك الأكاديمية بثقة وتميز.
+                    نؤمن بقدرة كل طالب على التفوق. منصة Education توفر لك بيئة تعليمية متكاملة تجمع بين الأساتذة الخبراء، المحتوى التفاعلي، والتقنيات الحديثة لضمان تحقيق أهدافك الأكاديمية بثقة وتميز.
                 </p>
                 
                 <!-- Features List -->
@@ -39,7 +39,7 @@
                         <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center flex-shrink-0">
                             <i class="fa-solid fa-graduation-cap text-amber-600 dark:text-amber-400"></i>
                         </div>
-                        <span class="font-bold text-sm md:text-base">معلمون متخصصون في جميع المواد الدراسية</span>
+                        <span class="font-bold text-sm md:text-base">أساتذة متخصصون في جميع المواد الدراسية</span>
                     </div>
                     <div class="flex items-center gap-3 text-gray-600 dark:text-gray-300">
                         <div class="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-500/20 flex items-center justify-center flex-shrink-0">
@@ -136,7 +136,7 @@
 <div id="stages" class="text-center mb-12 scroll-mt-24">
     <h2 class="text-4xl lg:text-5xl font-black mb-6 gradient-text">اختر مرحلتك الدراسية</h2>
     <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-        اكتشف عالمك التعليمي الجديد مع أفضل المعلمين في العراق.
+        اكتشف عالمك التعليمي الجديد مع أفضل الأساتذة في العراق.
     </p>
 </div>
 
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                    تجربة رائعة! المعلمين محترفين والمنهج منظوم بشكل ممتاز. سجلت في 5 كورسات وكلها مفيدة.
+                    تجربة رائعة! الأساتذة محترفون والمنهج منظوم بشكل ممتاز. سجلت في 5 كورسات وكلها مفيدة.
                 </p>
                 <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                     <i class="fa-solid fa-laptop-code text-amber-500"></i>
@@ -374,9 +374,9 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- Teacher Reviews Section -->
     <div class="max-w-[1440px] mx-auto mb-24 px-6 scroll-mt-24">
         <div class="text-center mb-16">
-            <h2 class="text-4xl lg:text-5xl font-black mb-6 gradient-text">آراء المدرسين</h2>
+            <h2 class="text-4xl lg:text-5xl font-black mb-6 gradient-text">آراء الأساتذة</h2>
             <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-                شاركنا المعلمون تجاربهم في التعامل مع منصتنا التعليمية
+                شاركنا الأساتذة تجاربهم في التعامل مع منصتنا التعليمية
             </p>
         </div>
 
@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', function() {
                          class="w-16 h-16 rounded-full object-cover border-3 border-white dark:border-white/10 shadow-lg">
                     <div class="flex-1">
                         <h3 class="text-xl font-black text-[var(--text-color)] dark:text-white mb-1">أ. سارة عبد الله</h3>
-                        <p class="text-sm text-amber-600 dark:text-amber-400 font-black mb-3">مدرسة اللغة الإنجليزية</p>
+                        <p class="text-sm text-amber-600 dark:text-amber-400 font-black mb-3">أستاذة اللغة الإنجليزية</p>
                         <div class="flex gap-1">
                             <i class="fa-solid fa-star text-amber-500 text-sm"></i>
                             <i class="fa-solid fa-star text-amber-500 text-sm"></i>
@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    منصة ممتازة تتيح لنا كمعلمين الوصول للطلاب بسهولة وتقديم المحتوى التعليمي بشكل احترافي. الأدوات المتاحة تساعد على التفاعل الفعال مع الطلاب.
+                    منصة ممتازة تتيح لنا كأساتذة الوصول للطلاب بسهولة وتقديم المحتوى التعليمي بشكل احترافي. الأدوات المتاحة تساعد على التفاعل الفعال مع الطلاب.
                 </p>
             </div>
 
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    تجربة تعليمية متكاملة تجمع بين الجودة والسهولة. المنصة توفر بيئة تعليمية محفزة تساعد على تحقيق أفضل النتائج للطلاب والمعلمين معاً.
+                    تجربة تعليمية متكاملة تجمع بين الجودة والسهولة. المنصة توفر بيئة تعليمية محفزة تساعد على تحقيق أفضل النتائج للطلاب والأساتذة معاً.
                 </p>
             </div>
         </div>

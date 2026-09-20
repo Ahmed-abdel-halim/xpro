@@ -75,7 +75,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::get('/subscription-codes/export', [\App\Http\Controllers\Admin\SubscriptionCodeController::class, 'export'])->name('subscription-codes.export');
     Route::delete('/subscription-codes/{subscriptionCode}', [\App\Http\Controllers\Admin\SubscriptionCodeController::class, 'destroy'])->name('subscription-codes.destroy');
 
-    // Lesson Video Management
+    // Lesson Video & Lectures Management (Any subject, upload or delete)
+    Route::get('/lectures', [\App\Http\Controllers\Admin\LessonVideoController::class, 'allLectures'])->name('lectures.index');
+    Route::post('/lectures', [\App\Http\Controllers\Admin\LessonVideoController::class, 'storeQuickLecture'])->name('lectures.store');
+    Route::delete('/lectures/{lesson}', [\App\Http\Controllers\Admin\LessonVideoController::class, 'destroyLesson'])->name('lectures.destroy');
     Route::get('/subjects/{subject}/videos', [\App\Http\Controllers\Admin\LessonVideoController::class, 'index'])->name('lessons.videos');
     Route::post('/subjects/{subject}/videos/store-for-teacher', [\App\Http\Controllers\Admin\LessonVideoController::class, 'storeForTeacher'])->name('lessons.store-for-teacher');
     Route::post('/lessons/{lesson}/upload', [\App\Http\Controllers\Admin\LessonVideoController::class, 'upload'])->name('lessons.upload');
@@ -106,6 +109,10 @@ Route::prefix('teacher')->middleware(['auth', 'role:teacher'])->name('teacher.')
         Route::get('/', [TeacherDashboard::class, 'index'])->name('dashboard');
         Route::resource('courses', \App\Http\Controllers\Teacher\CourseController::class);
         Route::resource('courses.lessons', \App\Http\Controllers\Teacher\LessonController::class);
+
+        // Quick lecture link upload & management
+        Route::post('/lectures/store', [\App\Http\Controllers\Teacher\LessonController::class, 'storeQuickLecture'])->name('lectures.store');
+        Route::delete('/lectures/{lesson}', [\App\Http\Controllers\Teacher\LessonController::class, 'destroyQuickLecture'])->name('lectures.destroy');
 
         Route::get('/enrollments/create', [\App\Http\Controllers\Teacher\EnrollmentController::class, 'create'])->name('enrollments.create');
         Route::post('/enrollments', [\App\Http\Controllers\Teacher\EnrollmentController::class, 'store'])->name('enrollments.store');

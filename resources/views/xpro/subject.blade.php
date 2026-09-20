@@ -76,8 +76,8 @@
             <div class="w-24 h-24 mx-auto bg-white/5 rounded-2xl flex items-center justify-center mb-6 border border-white/5">
                 <i class="fa-solid fa-user-xmark text-5xl text-gray-500"></i>
             </div>
-            <h2 class="text-2xl font-black text-white mb-3">لا يوجد معلمين</h2>
-            <p class="text-gray-400 font-medium">لم يتم إضافة أي معلمين يشرحون هذه المادة حتى الآن.</p>
+            <h2 class="text-2xl font-black text-white mb-3">لا يوجد أساتذة</h2>
+            <p class="text-gray-400 font-medium">لم يتم إضافة أي أساتذة يشرحون هذه المادة حتى الآن.</p>
         </div>
     @endif
 </div>

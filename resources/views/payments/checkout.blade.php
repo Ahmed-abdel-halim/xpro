@@ -20,7 +20,7 @@
                      alt="{{ $course->title }}" class="w-32 h-20 object-cover rounded-xl shadow-lg shadow-amber-500/10 dark:shadow-sky-500/10">
                 <div class="flex-1">
                     <h3 class="text-xl font-bold text-[var(--text-color)] dark:text-white mb-1">{{ $course->title }}</h3>
-                    <p class="text-gray-500 font-medium text-sm">المعلم: <span class="text-amber-600 dark:text-sky-400 font-bold">{{ $course->teacher->name }}</span></p>
+                    <p class="text-gray-500 font-medium text-sm">الأستاذ: <span class="text-amber-600 dark:text-sky-400 font-bold">{{ $course->teacher->name }}</span></p>
                     <div class="text-2xl font-black text-amber-500 mt-2">{{ number_format($course->price, 2) }} د.ع</div>
                 </div>
             </div>

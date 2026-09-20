@@ -643,17 +643,15 @@
                                     <p class="text-white font-black">{{ $settings['contact_email'] ?? 'info@education.com' }}</p>
                                 </div>
                             </li>
-                            @if(!empty($settings['contact_phone']))
                             <li class="flex items-start gap-3">
                                 <div class="w-8 h-8 rounded-lg bg-amber-500/20 dark:bg-sky-500/20 flex items-center justify-center flex-shrink-0 mt-1">
                                     <i class="fa-solid fa-phone text-amber-400 dark:text-sky-400 text-sm"></i>
                                 </div>
                                 <div>
-                                    <p class="text-gray-300">رقم التواصل</p>
-                                    <p class="text-white font-black">{{ $settings['contact_phone'] }}</p>
+                                    <p class="text-gray-300">رقم التواصل / الموبايل</p>
+                                    <p class="text-white font-black font-mono dir-ltr">{{ $settings['contact_phone'] ?? '00962796321929' }}</p>
                                 </div>
                             </li>
-                            @endif
                         </ul>
                     </div>
                 </div>
@@ -683,6 +681,19 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    @php
+        $floatWhatsapp = $settings['contact_whatsapp'] ?? '00962796321929';
+        $floatWhatsappUrl = "https://wa.me/" . preg_replace('/[^0-9]/', '', $floatWhatsapp) . "?text=" . urlencode("السلام عليكم، أود الاستفسار عن منصة Education");
+    @endphp
+    <div class="fixed bottom-6 left-6 z-50">
+        <a href="{{ $floatWhatsappUrl }}" target="_blank" class="whatsapp-float flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl hover:scale-110 transition duration-300 relative group" title="تواصل معنا عبر واتساب">
+            <i class="fa-brands fa-whatsapp text-3xl"></i>
+            <span class="whatsapp-tooltip">تواصل معنا عبر واتساب</span>
+        </a>
+    </div>
+
     @stack('scripts')
 </body>
 </html>

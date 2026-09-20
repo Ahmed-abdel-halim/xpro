@@ -6,16 +6,54 @@
 <div class="py-20 max-w-4xl mx-auto px-4">
     <div class="bg-white dark:bg-[#141c2f] border border-[#00555A]/10 dark:border-white/10 p-8 md:p-12 rounded-[2rem] shadow-2xl shadow-amber-500/5 dark:shadow-none">
         
-        <div class="text-center mb-12">
+        <div class="text-center mb-10">
             <div class="w-20 h-20 mx-auto bg-amber-500/10 dark:bg-sky-500/10 border border-amber-500/20 dark:border-sky-500/20 flex items-center justify-center text-amber-500 dark:text-sky-400 text-4xl rounded-[1.5rem] mb-6 shadow-[0_0_30px_rgba(245,158,11,0.15)] dark:shadow-[0_0_30px_rgba(14,165,233,0.15)]">
                 <i class="fa-solid fa-envelope-open-text"></i>
             </div>
             <h1 class="text-4xl md:text-5xl font-black mb-4 gradient-text">نحن هنا لخدمتك</h1>
             <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto">
-                هل لديك استفسار، اقتراح، أو واجهت مشكلة؟ يسعدنا تواصلك معنا وسنقوم بالرد عليك في أقرب وقت ممكن.
+                هل لديك استفسار، اقتراح، أو واجهت مشكلة؟ يسعدنا تواصلك معنا مباشرة عبر الهاتف أو الواتساب أو من خلال النموذج أدناه.
             </p>
         </div>
 
+        @php
+            $phone = $settings['contact_phone'] ?? '00962796321929';
+            $whatsappNumber = $settings['contact_whatsapp'] ?? '00962796321929';
+            $whatsappUrl = "https://wa.me/" . preg_replace('/[^0-9]/', '', $whatsappNumber) . "?text=" . urlencode("السلام عليكم، أود الاستفسار عن خدمات منصة Education");
+            $email = $settings['contact_email'] ?? 'info@education.com';
+        @endphp
+
+        <!-- Quick Contact Info Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+            <!-- Mobile Phone -->
+            <a href="tel:{{ $phone }}" class="p-5 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 flex flex-col items-center text-center hover:border-amber-500/50 dark:hover:border-sky-500/50 hover:-translate-y-1 transition group">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 dark:bg-sky-500/10 dark:text-sky-400 flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-phone-volume"></i>
+                </div>
+                <div class="text-xs text-gray-400 font-bold mb-1">رقم الموبايل المباشر</div>
+                <div class="text-base font-black text-gray-800 dark:text-white dir-ltr font-mono">{{ $phone }}</div>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="{{ $whatsappUrl }}" target="_blank" class="p-5 rounded-2xl bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 flex flex-col items-center text-center hover:bg-emerald-500/10 hover:-translate-y-1 transition group">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div class="text-xs text-emerald-600 dark:text-emerald-400 font-bold mb-1">محادثة واتساب سريعة</div>
+                <div class="text-base font-black text-gray-800 dark:text-white dir-ltr font-mono">{{ $whatsappNumber }}</div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:{{ $email }}" class="p-5 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 flex flex-col items-center text-center hover:border-purple-500/50 hover:-translate-y-1 transition group">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center text-xl mb-3 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="text-xs text-gray-400 font-bold mb-1">البريد الإلكتروني</div>
+                <div class="text-sm font-black text-gray-800 dark:text-white">{{ $email }}</div>
+            </a>
+        </div>
+
+        <!-- Form -->
         <form x-data="contactForm" 
             action="{{ route('contact.store') }}"
             @submit.prevent="submitForm($event)" 
@@ -36,7 +74,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-gray-600 dark:text-gray-400 text-sm font-bold mb-2">رقم الهاتف / الواتساب</label>
-                    <input type="text" name="phone" required class="w-full bg-gray-50 dark:bg-[#0b1121] border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-gray-800 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 focus:ring-1 focus:ring-amber-500/50 dark:focus:ring-sky-500/50 transition" placeholder="مثال: 077xxxxxxxx">
+                    <input type="text" name="phone" required class="w-full bg-gray-50 dark:bg-[#0b1121] border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-gray-800 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 focus:ring-1 focus:ring-amber-500/50 dark:focus:ring-sky-500/50 transition" placeholder="مثال: 077xxxxxxxx أو 00962xxxxxxxx">
                 </div>
                 <div>
                     <label class="block text-gray-600 dark:text-gray-400 text-sm font-bold mb-2">عنوان الرسالة</label>
@@ -88,11 +126,7 @@
                 @endif
 
                 <!-- WhatsApp -->
-                @php
-                    $whatsappNumber = $settings['contact_whatsapp'] ?? '201551322666';
-                    $whatsappUrl = "https://wa.me/" . preg_replace('/[^0-9]/', '', $whatsappNumber) . "?text=" . urlencode("السلام عليكم، أود الاستفسار عن خدمات منصة Education");
-                @endphp
-                <a href="{{ $whatsappUrl }}" target="_blank" class="w-12 h-12 rounded-full bg-[#25D366]/10 dark:bg-[#25D366]/20 border border-[#25D366]/20 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#25D366]/30 text-xl">
+                <a href="{{ $whatsappUrl }}" target="_blank" class="w-12 h-12 rounded-full bg-[#25D366]/10 dark:bg-[#25D366]/20 border border-[#25D366]/20 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#25D366]/30 text-xl" title="تواصل عبر واتساب">
                     <i class="fa-brands fa-whatsapp"></i>
                 </a>
             </div>

@@ -19,6 +19,7 @@ class User extends Authenticatable
         'role',
         'is_approved',
         'phone',
+        'specialization',
         'avatar',
         'commission_percentage',
         'is_free_trial_enabled',

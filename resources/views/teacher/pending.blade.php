@@ -22,7 +22,7 @@
         
         <p class="text-gray-500 dark:text-gray-400 font-medium text-base mb-6 leading-relaxed">
             مرحباً بك يا أستاذ/ <span class="text-amber-600 dark:text-sky-400 font-bold">{{ auth()->user()->name }}</span>.
-            لقد تم استلام طلب تسجيلك كمعلم بنجاح. نقوم حالياً بمراجعة البيانات وتفعيل الحساب.
+            لقد تم استلام طلب تسجيلك كأستاذ بنجاح. نقوم حالياً بمراجعة البيانات وتفعيل الحساب.
         </p>
 
         <div class="p-5 bg-amber-500/5 dark:bg-sky-500/5 rounded-2xl border border-amber-500/10 dark:border-sky-500/10 mb-8">

@@ -17,7 +17,18 @@ class UserSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@education.com'],
             [
-                'name' => 'إدارة المنصة',
+                'name' => 'مدير المنصة',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+                'phone' => '07701234567',
+                'is_approved' => true,
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'ahmed@education.com'],
+            [
+                'name' => 'الأستاذ أحمد عبد الحليم',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
                 'phone' => '07701234567',
@@ -43,6 +54,7 @@ class UserSeeder extends Seeder
                 'name' => 'الأستاذ أحمد العراقي',
                 'password' => Hash::make('password'),
                 'role' => 'teacher',
+                'specialization' => 'رياضيات',
                 'phone' => '07702345678',
                 'is_approved' => true,
                 'commission_percentage' => 20.00,
@@ -52,9 +64,10 @@ class UserSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'teacher@xpro.com'],
             [
-                'name' => 'المعلم النموذجي',
+                'name' => 'الأستاذ علي الكاظمي',
                 'password' => Hash::make('password'),
                 'role' => 'teacher',
+                'specialization' => 'فيزياء',
                 'phone' => '07702345679',
                 'is_approved' => true,
                 'commission_percentage' => 20.00,

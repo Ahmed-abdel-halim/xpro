@@ -271,7 +271,7 @@
 
                     <div>
                         <div class="font-bold text-xl text-[var(--text-color)] dark:text-white mb-1">{{ $course->teacher->name }}</div>
-                        <div class="text-sm font-medium text-gray-500 dark:text-gray-500">معلم خبير في {{ $course->subject->name }}</div>
+                        <div class="text-sm font-medium text-gray-500 dark:text-gray-500">أستاذ خبير في {{ $course->subject->name }}</div>
                     </div>
                 </div>
             </div>

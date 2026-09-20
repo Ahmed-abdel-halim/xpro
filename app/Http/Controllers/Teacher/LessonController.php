@@ -131,4 +131,64 @@ class LessonController extends Controller
         return redirect()->route('teacher.courses.lessons.index', $course->id)
             ->with('success', 'تم حذف الدرس بنجاح.');
     }
+
+    /** رفع رابط محاضرة سريعة للأستاذ في مادته مباشرة */
+    public function storeQuickLecture(Request $request)
+    {
+        $request->validate([
+            'subject_id'   => 'required|exists:subjects,id',
+            'title'        => 'required|string|max:255',
+            'video_url'    => 'required|url',
+            'description'  => 'nullable|string|max:1000',
+            'is_free'      => 'nullable|boolean',
+        ], [
+            'subject_id.required' => 'يرجى اختيار المادة الدراسية',
+            'title.required'      => 'يرجى كتابة عنوان المحاضرة',
+            'video_url.required'  => 'يرجى إدخال رابط المحاضرة',
+            'video_url.url'       => 'يرجى إدخال رابط صحيح (مثل: https://youtube.com/...)',
+        ]);
+
+        $teacher = auth()->user();
+        $subject = \App\Models\Subject::findOrFail($request->subject_id);
+
+        $course = Course::firstOrCreate(
+            [
+                'teacher_id' => $teacher->id,
+                'subject_id' => $subject->id,
+            ],
+            [
+                'title'       => 'شرح مادة ' . $subject->name . ' - الأستاذ ' . $teacher->name,
+                'description' => 'المحاضرات والشروحات الخاصة بمادة ' . $subject->name,
+                'price'       => 0,
+            ]
+        );
+
+        $order = $course->lessons()->max('order') + 1;
+
+        $course->lessons()->create([
+            'title'       => $request->title,
+            'description' => $request->description,
+            'video_url'   => $request->video_url,
+            'is_free'     => $request->boolean('is_free', true),
+            'order'       => $order,
+        ]);
+
+        return back()->with('success', 'تم رفع رابط المحاضرة بنجاح لمادة ' . $subject->name);
+    }
+
+    /** حذف المحاضرة السريعة للأستاذ */
+    public function destroyQuickLecture(Lesson $lesson)
+    {
+        if ($lesson->course->teacher_id !== auth()->id()) {
+            abort(403);
+        }
+
+        if ($lesson->video_path && file_exists(storage_path('app/public/' . $lesson->video_path))) {
+            unlink(storage_path('app/public/' . $lesson->video_path));
+        }
+
+        $lesson->delete();
+
+        return back()->with('success', 'تم حذف المحاضرة بنجاح');
+    }
 }

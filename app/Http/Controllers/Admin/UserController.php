@@ -23,17 +23,17 @@ class UserController extends Controller
     public function approveTeacher(User $user)
     {
         if ($user->role !== 'teacher') {
-            return back()->with('error', 'هذا المستخدم ليس معلماً');
+            return back()->with('error', 'هذا المستخدم ليس أستاذاً');
         }
 
         $user->update(['is_approved' => true]);
-        return back()->with('success', 'تم اعتماد المعلم بنجاح.');
+        return back()->with('success', 'تم اعتماد الأستاذ بنجاح.');
     }
 
     public function updateTeacherSettings(Request $request, User $user)
     {
         if ($user->role !== 'teacher') {
-            return back()->with('error', 'هذا المستخدم ليس معلماً');
+            return back()->with('error', 'هذا المستخدم ليس أستاذاً');
         }
 
         $user->update([
@@ -49,6 +49,7 @@ class UserController extends Controller
             'name'                  => 'required|string|max:255',
             'email'                 => 'required|string|email|max:255|unique:users,email',
             'phone'                 => 'nullable|string|max:30',
+            'specialization'        => 'nullable|string|max:255',
             'password'              => 'required|string|min:6',
             'commission_percentage' => 'nullable|numeric|min:0|max:100',
         ]);
@@ -57,25 +58,27 @@ class UserController extends Controller
             'name'                  => $request->name,
             'email'                 => $request->email,
             'phone'                 => $request->phone,
+            'specialization'        => $request->specialization,
             'password'              => \Illuminate\Support\Facades\Hash::make($request->password),
             'role'                  => 'teacher',
             'is_approved'           => $request->boolean('is_approved', true),
             'commission_percentage' => $request->filled('commission_percentage') ? floatval($request->commission_percentage) : 20.0,
         ]);
 
-        return back()->with('success', 'تم إضافة المعلم بنجاح.');
+        return back()->with('success', 'تم إضافة الأستاذ بنجاح.');
     }
 
     public function updateTeacher(Request $request, User $user)
     {
         if ($user->role !== 'teacher') {
-            return back()->with('error', 'هذا المستخدم ليس معلماً.');
+            return back()->with('error', 'هذا المستخدم ليس أستاذاً.');
         }
 
         $request->validate([
             'name'                  => 'required|string|max:255',
             'email'                 => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'phone'                 => 'nullable|string|max:30',
+            'specialization'        => 'nullable|string|max:255',
             'password'              => 'nullable|string|min:6',
             'commission_percentage' => 'nullable|numeric|min:0|max:100',
         ]);
@@ -84,6 +87,7 @@ class UserController extends Controller
             'name'                  => $request->name,
             'email'                 => $request->email,
             'phone'                 => $request->phone,
+            'specialization'        => $request->specialization,
             'commission_percentage' => $request->filled('commission_percentage') ? floatval($request->commission_percentage) : $user->commission_percentage,
             'is_approved'           => $request->boolean('is_approved'),
         ];
@@ -94,7 +98,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return back()->with('success', 'تم تحديث بيانات المعلم بنجاح.');
+        return back()->with('success', 'تم تحديث بيانات الأستاذ بنجاح.');
     }
 
     public function storeStudent(Request $request)
@@ -148,7 +152,13 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if ($user->isAdmin()) {
+            return back()->with('error', 'لا يمكن حذف حساب المسؤول الرئيسي');
+        }
+
+        $roleName = $user->isTeacher() ? 'الأستاذ' : 'الطالب';
         $user->delete();
-        return back()->with('success', 'تم حذف المستخدم بنجاح.');
+
+        return back()->with('success', 'تم حذف حساب ' . $roleName . ' بنجاح');
     }
 }

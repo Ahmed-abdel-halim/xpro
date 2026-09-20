@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Lesson;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -49,6 +51,10 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        return view('teacher.dashboard', compact('stats', 'recentEnrollments'));
+        // جلب المواد الدراسية وقائمة محاضرات هذا الأستاذ لتمكينه من رفع وإدارة الروابط بسهولة
+        $subjects = Subject::with('grade.stage')->orderBy('name')->get();
+        $myLessons = Lesson::whereIn('course_id', $courseIds)->with('course.subject')->latest()->take(15)->get();
+
+        return view('teacher.dashboard', compact('stats', 'recentEnrollments', 'subjects', 'myLessons'));
     }
 }

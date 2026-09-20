@@ -108,7 +108,7 @@
                     <i class="fa-solid fa-chalkboard-user text-2xl"></i>
                 </div>
                 <div class="text-3xl font-black text-[#004d40] dark:text-sky-400 mb-2 counter" data-target="500">0</div>
-                <div class="text-sm font-bold text-gray-600 dark:text-gray-400">معلم خبير</div>
+                <div class="text-sm font-bold text-gray-600 dark:text-gray-400">أستاذ خبير</div>
             </div>
             
             <div class="p-8 text-center group hover:bg-emerald-50 dark:hover:bg-emerald-500/5 transition-all duration-300">

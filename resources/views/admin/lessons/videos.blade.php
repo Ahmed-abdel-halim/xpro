@@ -24,7 +24,7 @@
         <button @click="showTeacherModal = true" 
                 class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-2xl transition flex items-center gap-2 shadow-xl shadow-emerald-600/20 hover:-translate-y-0.5">
             <i class="fa-solid fa-video"></i>
-            <span>إضافة فيديو لمدرس معين</span>
+            <span>إضافة رابط فيديو لأستاذ معين</span>
         </button>
     </div>
 
@@ -40,7 +40,7 @@
                     <p class="text-sm text-gray-500 mt-1 flex items-center gap-4 flex-wrap">
                         <span class="flex items-center gap-1.5 font-semibold text-amber-600 dark:text-amber-400">
                             <i class="fa-solid fa-user-tie"></i>
-                            المدرس: {{ $course->teacher->name }}
+                            الأستاذ: {{ $course->teacher->name }}
                         </span>
                         <span class="text-sky-500 flex items-center gap-1.5 font-semibold">
                             <i class="fa-solid fa-list-ol"></i>
@@ -172,11 +172,11 @@
             </div>
             <h2 class="text-2xl font-black text-[var(--text-color)] dark:text-white mb-2">لا توجد كورسات أو فيديوهات بعد</h2>
             <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto mb-6">
-                لم يقم المعلمون برفع أي محتوى لهذه المادة حتى الآن. يمكنك كمسؤول إضافة كورس وفيديو لأي معلم الآن مباشرة!
+                لم يقم الأساتذة برفع أي محتوى لهذه المادة حتى الآن. يمكنك كمسؤول إضافة كورس وفيديو لأي أستاذ الآن مباشرة!
             </p>
             <button @click="showTeacherModal = true" class="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl transition inline-flex items-center gap-2 shadow-xl shadow-emerald-600/25">
                 <i class="fa-solid fa-plus"></i>
-                <span>إضافة أول فيديو لمدرس في مادة {{ $subject->name }}</span>
+                <span>إضافة أول فيديو لأستاذ في مادة {{ $subject->name }}</span>
             </button>
         </div>
     @endforelse
@@ -193,7 +193,7 @@
                 <div class="bg-white dark:bg-[#161b22] border border-gray-200 dark:border-white/10 w-full max-w-xl rounded-3xl p-7 shadow-2xl" @click.away="showTeacherModal = false">
                     <div class="flex justify-between items-center mb-6 border-b border-gray-100 dark:border-white/5 pb-4">
                         <div>
-                            <h3 class="text-xl font-bold text-[var(--text-color)] dark:text-white">إضافة فيديو لمدرس معين</h3>
+                            <h3 class="text-xl font-bold text-[var(--text-color)] dark:text-white">إضافة رابط فيديو لأستاذ معين</h3>
                             <p class="text-xs text-gray-500 mt-1">مادة {{ $subject->name }} ({{ $subject->grade->name }})</p>
                         </div>
                         <button @click="showTeacherModal = false" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition">
@@ -205,11 +205,11 @@
                         @csrf
                         
                         <div>
-                            <label class="block mb-1 text-xs text-gray-500 font-bold">المدرس *</label>
-                            <select name="teacher_id" required class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 transition">
-                                <option value="">-- اختر المدرس --</option>
+                            <label class="block mb-1 text-xs text-gray-500 font-bold">الأستاذ *</label>
+                            <select name="teacher_id" required class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-[var(--text-color)] dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 transition font-bold">
+                                <option value="">-- اختر الأستاذ --</option>
                                 @foreach($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}">{{ $teacher->name }} ({{ $teacher->email }})</option>
+                                    <option value="{{ $teacher->id }}">{{ $teacher->name }} {{ $teacher->specialization ? '(' . $teacher->specialization . ')' : '' }} ({{ $teacher->email }})</option>
                                 @endforeach
                             </select>
                         </div>

@@ -197,10 +197,14 @@
                         <i class="fa-solid fa-book ml-3 w-5 text-center"></i>
                         <span>إدارة المواد</span>
                     </a>
+                    <a href="{{ route('admin.lectures.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('admin.lectures.*') ? 'active-link' : '' }}">
+                        <i class="fa-solid fa-video ml-3 w-5 text-center text-emerald-500"></i>
+                        <span>روابط ومحاضرات المواد</span>
+                    </a>
 
                     <a href="{{ route('admin.teachers.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('admin.teachers.*') ? 'active-link' : '' }}">
                         <i class="fa-solid fa-user-tie ml-3 w-5 text-center"></i>
-                        <span>المعلمون</span>
+                        <span>الأساتذة</span>
                     </a>
                     <a href="{{ route('admin.students.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('admin.students.*') ? 'active-link' : '' }}">
                         <i class="fa-solid fa-user-graduate ml-3 w-5 text-center"></i>
@@ -318,7 +322,7 @@
 
                     <div class="flex flex-col text-left border-r border-gray-200 dark:border-white/10 pr-2 sm:pr-4 hidden sm:flex">
                         <span class="text-sm font-bold text-[var(--text-color)]">{{ auth()->user()->name }}</span>
-                        <span class="text-[10px] text-gray-500">{{ auth()->user()->role == 'admin' ? 'مدير النظام' : (auth()->user()->role == 'teacher' ? (auth()->user()->is_approved ? 'معلم معتمد' : 'معلم قيد المراجعة') : 'طالب') }}</span>
+                        <span class="text-[10px] text-gray-500">{{ auth()->user()->role == 'admin' ? 'مدير النظام' : (auth()->user()->role == 'teacher' ? (auth()->user()->is_approved ? 'أستاذ معتمد' : 'أستاذ قيد المراجعة') : 'طالب') }}</span>
                     </div>
                     <div class="w-12 h-12 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-white/10">
                         @if(auth()->user()->avatar)

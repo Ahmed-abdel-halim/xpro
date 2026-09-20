@@ -81,7 +81,7 @@
                          x-transition:enter-end="opacity-100 translate-y-0"
                          class="px-8 pb-6">
                         <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-lg border-t border-[#00555A]/5 dark:border-white/5 pt-4">
-                            Education هي منصة تعليمية متكاملة تربط بين الطلاب والمعلمين، توفر دروساً مسجلة، فصولاً مباشرة، اختبارات تفاعلية، وأدوات تتبع التقدم الأكاديمي.
+                            Education هي منصة تعليمية متكاملة تربط بين الطلاب والأساتذة، توفر دروساً مسجلة، فصولاً مباشرة، اختبارات تفاعلية، وأدوات تتبع التقدم الأكاديمي.
                         </p>
                     </div>
                 </div>

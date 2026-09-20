@@ -15,20 +15,20 @@
             <div class="text-right flex-1">
                 <div class="flex items-center justify-start gap-3 mb-6 flex-wrap">
                     <span class="px-4 py-2 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-500 text-sm font-black flex items-center gap-2">
-                        <i class="fa-solid fa-user-tie"></i> مدرس المادة: {{ $teacher->name }}
+                        <i class="fa-solid fa-user-tie"></i> أستاذ المادة: {{ $teacher->name }}
                     </span>
                     <span class="px-4 py-2 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-600 dark:text-sky-400 text-sm font-black flex items-center gap-2">
                         <i class="fa-solid fa-book-open"></i> {{ $subject->name }}
                     </span>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-black text-[var(--text-color)] dark:text-white mb-4 leading-tight tracking-tight">فصول المعلم</h1>
+                <h1 class="text-4xl md:text-6xl font-black text-[var(--text-color)] dark:text-white mb-4 leading-tight tracking-tight">فصول الأستاذ</h1>
                 <p class="text-gray-600 dark:text-gray-400 font-medium text-lg md:text-xl max-w-2xl ml-auto leading-relaxed">الكورسات المتاحة للأستاذ {{ $teacher->name }} في مادة {{ $subject->name }}.</p>
             </div>
 
             <!-- Action Button -->
             <div class="shrink-0">
                 <a href="{{ route('subject.show', $subject->id) }}" class="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-white dark:bg-white hover:bg-amber-500 text-[#0f1524] hover:text-white transition-all duration-300 font-black shadow-xl shadow-gray-200/50 dark:shadow-white/5 hover:shadow-amber-500/30 border border-gray-100 dark:border-transparent">
-                    <span class="text-lg">رجوع للمعلمين</span>
+                    <span class="text-lg">رجوع للأساتذة</span>
                     <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
                 </a>
             </div>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="flex justify-between items-center pt-6 border-t border-gray-100 dark:border-white/5 mt-auto">
-                        <span class="text-2xl font-black text-emerald-600 dark:text-emerald-400">{{ number_format($course->price, 2) }} <span class="text-sm font-bold opacity-70">ج.م</span></span>
+                        <span class="text-2xl font-black text-emerald-600 dark:text-emerald-400">{{ number_format($course->price, 2) }} <span class="text-sm font-bold opacity-70">د.ع</span></span>
                         <a href="{{ route('course.show', $course->id) }}" class="px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white dark:bg-sky-500 dark:hover:bg-sky-600 dark:text-white transition-all font-bold border border-amber-600/10 dark:border-transparent shadow-lg shadow-amber-500/20 dark:group-hover:shadow-sky-500/20">مشاهدة التفاصيل</a>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                 <i class="fa-solid fa-chalkboard-user text-6xl text-gray-300 dark:text-gray-600"></i>
             </div>
             <h2 class="text-2xl font-black text-[var(--text-color)] dark:text-white mb-3 relative z-10">لا توجد كورسات</h2>
-            <p class="text-gray-500 dark:text-gray-400 font-medium relative z-10 max-w-md mx-auto">هذا المعلم لم يقم بإضافة كورسات في هذه المادة بعد.</p>
+            <p class="text-gray-500 dark:text-gray-400 font-medium relative z-10 max-w-md mx-auto">هذا الأستاذ لم يقم بإضافة كورسات في هذه المادة بعد.</p>
         </div>
     @endif
 </div>

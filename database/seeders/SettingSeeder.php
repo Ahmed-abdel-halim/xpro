@@ -13,12 +13,11 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $settings = [
-            
             // Contact Info
-            ['key' => 'contact_phone', 'value' => '07701234567', 'group' => 'contact'],
+            ['key' => 'contact_phone', 'value' => '00962796321929', 'group' => 'contact'],
             ['key' => 'contact_email', 'value' => 'info@education.com', 'group' => 'contact'],
             ['key' => 'contact_address', 'value' => '', 'group' => 'contact'],
-            ['key' => 'contact_whatsapp', 'value' => '9647701234567', 'group' => 'contact'],
+            ['key' => 'contact_whatsapp', 'value' => '00962796321929', 'group' => 'contact'],
         ];
 
         foreach ($settings as $setting) {
