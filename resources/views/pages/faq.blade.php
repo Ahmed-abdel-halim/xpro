@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'الأسئلة الشائعة - Xpro')
+@section('title', 'الأسئلة الشائعة - Education')
 
 @section('content')
 <!-- Hero Section -->
@@ -25,7 +25,7 @@
         
         <!-- Enhanced Description -->
         <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
-            نجيب هنا على أبرز تساؤلاتكم حول منصة Xpro التعليمية، من التسجيل وحتى استخدام الميزات المختلفة
+            نجيب هنا على أبرز تساؤلاتكم حول منصة Education التعليمية، من التسجيل وحتى استخدام الميزات المختلفة
         </p>
     </div>
 </div>
@@ -66,7 +66,7 @@
                     <button @click="active = (active === 0 ? null : 0)" 
                             class="w-full px-8 py-6 text-right flex items-center justify-between gap-4 group-hover:bg-amber-500/5 dark:group-hover:bg-sky-500/5 transition-colors">
                         <span class="text-lg md:text-xl font-bold text-[var(--text-color)] dark:text-white transition-colors" :class="active === 0 ? 'text-amber-600 dark:text-sky-400' : ''">
-                            ما هي منصة Xpro؟
+                            ما هي منصة Education؟
                         </span>
                         <div class="flex-shrink-0 w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 dark:bg-sky-500/10 dark:text-sky-400 flex items-center justify-center transition-all duration-300" 
                              :class="active === 0 ? 'rotate-180 bg-amber-500 dark:bg-sky-500 text-white' : ''">
@@ -81,7 +81,7 @@
                          x-transition:enter-end="opacity-100 translate-y-0"
                          class="px-8 pb-6">
                         <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-lg border-t border-[#00555A]/5 dark:border-white/5 pt-4">
-                            Xpro هي منصة تعليمية متكاملة تربط بين الطلاب والمعلمين، توفر دروساً مسجلة، فصولاً مباشرة، اختبارات تفاعلية، وأدوات تتبع التقدم الأكاديمي.
+                            Education هي منصة تعليمية متكاملة تربط بين الطلاب والمعلمين، توفر دروساً مسجلة، فصولاً مباشرة، اختبارات تفاعلية، وأدوات تتبع التقدم الأكاديمي.
                         </p>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                          x-transition:enter-end="opacity-100 translate-y-0"
                          class="px-8 pb-6">
                         <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-lg border-t border-[#00555A]/5 dark:border-white/5 pt-4">
-                            نقبل جميع وسائل الدفع الرئيسية: البطاقات الائتمانية، الحوالات البنكية، والدفع الإلكتروني الآمن. جميع المعاملات مشفرة ومؤمنة.
+                            نقبل وسائل الدفع والاشتراك المعتمدة: زين كاش، البطاقات البنكية، وتفعيل الدروس المباشر عبر رموز الاشتراك. جميع المعاملات مشفرة ومؤمنة.
                         </p>
                     </div>
                 </div>
@@ -270,7 +270,7 @@
                          x-transition:enter-end="opacity-100 translate-y-0"
                          class="px-8 pb-6">
                         <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-lg border-t border-[#00555A]/5 dark:border-white/5 pt-4">
-                            نعم، تطبيق Xpro متاح الآن لنظامي iOS و Android. يمكنك تحميله من App Store أو Google Play والوصول إلى جميع الميزات من جوالك.
+                            نعم، تطبيق Education متاح الآن لنظامي iOS و Android. يمكنك تحميله من App Store أو Google Play والوصول إلى جميع الميزات من جوالك.
                         </p>
                     </div>
                 </div>
@@ -294,8 +294,8 @@
                 <a href="{{ route('contact') }}" class="px-8 py-4 bg-white text-[#004d40] dark:text-sky-600 font-black text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
                     تواصل مع الدعم الفني
                 </a>
-                <a href="mailto:support@xpro.com" class="px-8 py-4 bg-white/20 text-white font-black text-lg rounded-2xl border-2 border-white/30 hover:bg-white/30 transition-all duration-300">
-                    support@xpro.com
+                <a href="mailto:support@education.com" class="px-8 py-4 bg-white/20 text-white font-black text-lg rounded-2xl border-2 border-white/30 hover:bg-white/30 transition-all duration-300">
+                    support@education.com
                 </a>
             </div>
         </div>

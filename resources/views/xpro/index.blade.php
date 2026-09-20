@@ -30,7 +30,7 @@
                 
                 <!-- Enhanced Description -->
                 <p class="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-2xl leading-relaxed font-medium">
-                    نؤمن بقدرة كل طالب على التفوق. منصة Xpro توفر لك بيئة تعليمية متكاملة تجمع بين المعلمين الخبراء، المحتوى التفاعلي، والتقنيات الحديثة لضمان تحقيق أهدافك الأكاديمية بثقة وتميز.
+                    نؤمن بقدرة كل طالب على التفوق. منصة Education توفر لك بيئة تعليمية متكاملة تجمع بين المعلمين الخبراء، المحتوى التفاعلي، والتقنيات الحديثة لضمان تحقيق أهدافك الأكاديمية بثقة وتميز.
                 </p>
                 
                 <!-- Features List -->
@@ -86,7 +86,7 @@
                     <div class="relative z-10 w-full h-auto rounded-[2rem] overflow-hidden border border-[#00555A]/15 dark:border-white/10 shadow-2xl bg-white/50 dark:bg-[#141c2f]/50 backdrop-blur-sm">
                         <!-- Teacher Image -->
                         <img src="{{ asset('images/teacher_hero.png') }}" 
-                             alt="Xpro Teacher" 
+                             alt="Education Teacher" 
                              class="w-full h-auto transform transition-transform duration-700 hover:scale-105">
                     </div>
 
@@ -136,7 +136,7 @@
 <div id="stages" class="text-center mb-12 scroll-mt-24">
     <h2 class="text-4xl lg:text-5xl font-black mb-6 gradient-text">اختر مرحلتك الدراسية</h2>
     <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-        اكتشف عالمك التعليمي الجديد مع أفضل المعلمين في مصر.
+        اكتشف عالمك التعليمي الجديد مع أفضل المعلمين في العراق.
     </p>
 </div>
 
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="w-full h-full bg-gradient-to-br from-amber-500/10 to-white dark:from-sky-900/50 dark:to-[#141c2f] flex items-center justify-center text-5xl text-amber-500/30 dark:text-sky-400">
                             @if(str_contains($stage->name, 'ابتدائي')) <i class="fa-solid fa-school"></i> 
                             @elseif(str_contains($stage->name, 'إعدادي')) <i class="fa-solid fa-book-open"></i> 
-                            @elseif(str_contains($stage->name, 'ثانوي')) <i class="fa-solid fa-user-graduate"></i> 
+                            @elseif(str_contains($stage->name, 'متوسط')) <i class="fa-solid fa-user-graduate"></i> 
                             @elseif(str_contains($stage->name, 'جامعة')) <i class="fa-solid fa-building-columns"></i> 
                             @else <i class="fa-solid fa-briefcase"></i> @endif
                         </div>

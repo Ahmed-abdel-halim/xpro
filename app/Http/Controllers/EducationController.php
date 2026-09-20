@@ -33,15 +33,18 @@ class EducationController extends Controller
     public function subject($id)
     {
         $subject = Subject::findOrFail($id);
-        
-        // Group available courses by teacher
-        $teachers = \App\Models\User::whereHas('courses', function($query) use ($id) {
-            $query->where('subject_id', $id);
-        })->withCount(['courses' => function($query) use ($id) {
-            $query->where('subject_id', $id);
-        }])->get();
+        $hasAccess = session("subject_access_{$id}") 
+            || (auth()->check() && (
+                auth()->user()->isAdmin() 
+                || auth()->user()->isTeacher() 
+                || auth()->user()->enrolledCourses()->where('subject_id', $id)->exists()
+            ));
 
-        return view('xpro.subject', compact('subject', 'teachers'));
+        if ($hasAccess) {
+            return redirect()->route('subject.videos', ['gradeId' => $subject->grade_id, 'subjectId' => $subject->id]);
+        }
+
+        return redirect()->route('grade.show', $subject->grade_id)->with('info', 'يرجى إدخال رمز الاشتراك للوصول لمادة ' . $subject->name);
     }
 
     public function teacherCourses($subjectId, $teacherId)

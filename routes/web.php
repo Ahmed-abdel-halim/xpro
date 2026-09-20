@@ -62,6 +62,24 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->name('admin.')->grou
     Route::get('/messages', [\App\Http\Controllers\Admin\ContactMessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{message}', [\App\Http\Controllers\Admin\ContactMessageController::class, 'show'])->name('messages.show');
     Route::delete('/messages/{message}', [\App\Http\Controllers\Admin\ContactMessageController::class, 'destroy'])->name('messages.destroy');
+
+    // Subscription Codes
+    Route::get('/subscription-codes', [\App\Http\Controllers\Admin\SubscriptionCodeController::class, 'index'])->name('subscription-codes.index');
+    Route::post('/subscription-codes/generate', [\App\Http\Controllers\Admin\SubscriptionCodeController::class, 'generate'])->name('subscription-codes.generate');
+    Route::get('/subscription-codes/export', [\App\Http\Controllers\Admin\SubscriptionCodeController::class, 'export'])->name('subscription-codes.export');
+    Route::delete('/subscription-codes/{subscriptionCode}', [\App\Http\Controllers\Admin\SubscriptionCodeController::class, 'destroy'])->name('subscription-codes.destroy');
+
+    // Lesson Video Management
+    Route::get('/subjects/{subject}/videos', [\App\Http\Controllers\Admin\LessonVideoController::class, 'index'])->name('lessons.videos');
+    Route::post('/subjects/{subject}/videos/store-for-teacher', [\App\Http\Controllers\Admin\LessonVideoController::class, 'storeForTeacher'])->name('lessons.store-for-teacher');
+    Route::post('/lessons/{lesson}/upload', [\App\Http\Controllers\Admin\LessonVideoController::class, 'upload'])->name('lessons.upload');
+    Route::post('/courses/{course}/lessons', [\App\Http\Controllers\Admin\LessonVideoController::class, 'storeLesson'])->name('lessons.store-lesson');
+    Route::delete('/lessons/{lesson}', [\App\Http\Controllers\Admin\LessonVideoController::class, 'destroyLesson'])->name('lessons.destroy-lesson');
+
+    // Payments Management (Company receives, Admin confirms)
+    Route::get('/payments', [\App\Http\Controllers\Admin\PaymentsController::class, 'index'])->name('payments.index');
+    Route::post('/payments/{payment}/confirm', [\App\Http\Controllers\Admin\PaymentsController::class, 'confirm'])->name('payments.confirm');
+    Route::post('/payments/{payment}/reject', [\App\Http\Controllers\Admin\PaymentsController::class, 'reject'])->name('payments.reject');
 });
 
 
@@ -125,6 +143,10 @@ Route::get('/stage/{id}', [EducationController::class, 'stage'])->name('stage.sh
 Route::get('/grade/{id}', [EducationController::class, 'grade'])->name('grade.show');
 Route::get('/subject/{id}', [EducationController::class, 'subject'])->name('subject.show');
 Route::get('/subject/{subject}/teacher/{teacher}', [EducationController::class, 'teacherCourses'])->name('subject.teacher');
+
+// Subject Access (Subscription Code Verification)
+Route::post('/subject/{gradeId}/{subjectId}/verify', [\App\Http\Controllers\SubjectAccessController::class, 'verify'])->name('subject.verify');
+Route::get('/grade/{gradeId}/subject/{subjectId}/videos', [\App\Http\Controllers\SubjectAccessController::class, 'videos'])->name('subject.videos');
 
 // Courses
 Route::get('/course/{id}', [CourseController::class, 'show'])->name('course.show');

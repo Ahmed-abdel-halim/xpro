@@ -13,39 +13,73 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Admin Account
+        // Admin Accounts
+        User::updateOrCreate(
+            ['email' => 'admin@education.com'],
+            [
+                'name' => 'إدارة المنصة',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+                'phone' => '07701234567',
+                'is_approved' => true,
+            ]
+        );
+
         User::updateOrCreate(
             ['email' => 'admin@xpro.com'],
             [
                 'name' => 'Admin User',
                 'password' => Hash::make('password'),
                 'role' => 'admin',
-                'phone' => '01112345678',
+                'phone' => '07701234568',
                 'is_approved' => true,
             ]
         );
 
-        // Teacher Account
+        // Teacher Accounts
+        User::updateOrCreate(
+            ['email' => 'teacher@education.com'],
+            [
+                'name' => 'الأستاذ أحمد العراقي',
+                'password' => Hash::make('password'),
+                'role' => 'teacher',
+                'phone' => '07702345678',
+                'is_approved' => true,
+                'commission_percentage' => 20.00,
+            ]
+        );
+
         User::updateOrCreate(
             ['email' => 'teacher@xpro.com'],
             [
                 'name' => 'المعلم النموذجي',
                 'password' => Hash::make('password'),
                 'role' => 'teacher',
-                'phone' => '01012345678',
+                'phone' => '07702345679',
                 'is_approved' => true,
                 'commission_percentage' => 20.00,
             ]
         );
 
-        // Student Account
+        // Student Accounts
+        User::updateOrCreate(
+            ['email' => 'student@education.com'],
+            [
+                'name' => 'الطالب المتميز',
+                'password' => Hash::make('password'),
+                'role' => 'student',
+                'phone' => '07703456789',
+                'is_approved' => true,
+            ]
+        );
+
         User::updateOrCreate(
             ['email' => 'student@xpro.com'],
             [
                 'name' => 'الطالب التجريبي',
                 'password' => Hash::make('password'),
                 'role' => 'student',
-                'phone' => '01212345678',
+                'phone' => '07703456790',
                 'is_approved' => true,
             ]
         );

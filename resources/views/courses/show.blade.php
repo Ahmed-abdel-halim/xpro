@@ -146,7 +146,7 @@
                          :style="`top: ${wmY}%; left: ${wmX}%; transform: translate(-50%, -50%);`"
                          x-show="activeVideo">
                         <div class="text-white text-sm md:text-xl font-black rotate-[-15deg] bg-black/50 px-2 py-1 rounded backdrop-blur-sm">
-                            {{ auth()->check() ? auth()->user()->email . ' - ' . auth()->user()->phone : 'Xpro Protected' }}
+                            {{ auth()->check() ? auth()->user()->email . ' - ' . auth()->user()->phone : 'Education Protected' }}
                         </div>
                     </div>
 

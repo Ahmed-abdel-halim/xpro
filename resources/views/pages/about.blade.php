@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'عن المنصة - Xpro')
+@section('title', 'عن المنصة - Education')
 
 @section('content')
 <!-- Hero Section -->
@@ -30,7 +30,7 @@
                 
                 <!-- Enhanced Description -->
                 <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl leading-relaxed font-medium">
-                    في Xpro، نؤمن بأن التعليم هو مفتاح التقدم. نقدم منصة تعليمية متكاملة تجمع بين الخبرة والابتكار، حيث نسعى جاهدين لتوفير بيئة تعليمية محفزة تمكن كل طالب من تحقيق أقصى إمكاناته.
+                    في Education، نؤمن بأن التعليم هو مفتاح التقدم. نقدم منصة تعليمية متكاملة تجمع بين الخبرة والابتكار، حيث نسعى جاهدين لتوفير بيئة تعليمية محفزة تمكن كل طالب من تحقيق أقصى إمكاناته.
                 </p>
                 
                 <!-- Mission & Vision -->
@@ -76,7 +76,7 @@
                     
                     <!-- Main Image -->
                     <img src="{{ asset('images/hero.png') }}" 
-                         alt="Xpro About" 
+                         alt="Education About" 
                          class="relative z-10 w-full h-auto drop-shadow-2xl transform transition-transform duration-700 hover:scale-105 rounded-3xl">
                 </div>
             </div>
@@ -177,7 +177,7 @@
 <!-- Features Section -->
 <div class="max-w-7xl mx-auto px-6 mb-24">
     <div class="text-center mb-16">
-        <h2 class="text-4xl lg:text-5xl font-black mb-6 gradient-text">لماذا تختار Xpro؟</h2>
+        <h2 class="text-4xl lg:text-5xl font-black mb-6 gradient-text">لماذا تختار Education؟</h2>
         <p class="text-xl text-gray-400 max-w-2xl mx-auto">
             مميزات تجعلنا الخيار الأول للتعليم الرقمي في المنطقة
         </p>
@@ -255,7 +255,7 @@
         <div class="relative z-10">
             <h2 class="text-3xl lg:text-4xl font-black text-white mb-6">هل أنت مستعد لبدء رحلتك التعليمية؟</h2>
             <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                انضم إلى آلاف الطلاب الذين يحققون نجاحاً مع Xpro كل يوم
+                انضم إلى آلاف الطلاب الذين يحققون نجاحاً مع Education كل يوم
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="{{ route('register') }}" class="px-8 py-4 bg-white text-[#004d40] dark:text-sky-600 font-black text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Xpro - حلم الكلية اللي في دماغك يبتدي من هنا')
+@section('title', 'Education - طريقك للتفوق الدراسي في العراق يبدأ من هنا')
 
 @section('content')
 <!-- Modern Hero Section -->
@@ -66,7 +66,7 @@
                     
                     <!-- Teacher Image -->
                     <img src="{{ asset('images/teacher_hero.png') }}" 
-                         alt="Xpro Teacher" 
+                         alt="Education Teacher" 
                          class="relative z-10 w-full h-auto drop-shadow-2xl transform transition-transform duration-700 hover:scale-105">
 
                     <!-- Floating Testimonial 1 -->
@@ -83,7 +83,7 @@
                                 <i class="fa-solid fa-star text-[8px] text-amber-500"></i>
                                 <i class="fa-solid fa-star text-[8px] text-amber-500"></i>
                             </div>
-                            <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold">المحتوى هنا بجد ممتع وبيسهل المذاكرة.</p>
+                            <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold">المحتوى هنا ممتع ويساعد على التفوق والنجاح.</p>
                         </div>
                     </div>
 
@@ -101,7 +101,7 @@
                                 <i class="fa-solid fa-star text-[8px] text-amber-500"></i>
                                 <i class="fa-solid fa-star text-[8px] text-amber-500"></i>
                             </div>
-                            <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold">قدرت أحسن مستواي في وقت قياسي!</p>
+                            <p class="text-[10px] text-gray-500 dark:text-gray-400 font-bold">تمكنت من رفع مستواي الدراسي في وقت قياسي!</p>
                         </div>
                     </div>
                 </div>

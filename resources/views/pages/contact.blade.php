@@ -36,7 +36,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-gray-600 dark:text-gray-400 text-sm font-bold mb-2">رقم الهاتف / الواتساب</label>
-                    <input type="text" name="phone" required class="w-full bg-gray-50 dark:bg-[#0b1121] border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-gray-800 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 focus:ring-1 focus:ring-amber-500/50 dark:focus:ring-sky-500/50 transition" placeholder="مثال: 010xxxxxxxx">
+                    <input type="text" name="phone" required class="w-full bg-gray-50 dark:bg-[#0b1121] border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-gray-800 dark:text-white focus:outline-none focus:border-amber-500 dark:focus:border-sky-500 focus:ring-1 focus:ring-amber-500/50 dark:focus:ring-sky-500/50 transition" placeholder="مثال: 077xxxxxxxx">
                 </div>
                 <div>
                     <label class="block text-gray-600 dark:text-gray-400 text-sm font-bold mb-2">عنوان الرسالة</label>
@@ -90,7 +90,7 @@
                 <!-- WhatsApp -->
                 @php
                     $whatsappNumber = $settings['contact_whatsapp'] ?? '201551322666';
-                    $whatsappUrl = "https://wa.me/" . preg_replace('/[^0-9]/', '', $whatsappNumber) . "?text=" . urlencode("السلام عليكم، أود الاستفسار عن خدمات منصة Xpro");
+                    $whatsappUrl = "https://wa.me/" . preg_replace('/[^0-9]/', '', $whatsappNumber) . "?text=" . urlencode("السلام عليكم، أود الاستفسار عن خدمات منصة Education");
                 @endphp
                 <a href="{{ $whatsappUrl }}" target="_blank" class="w-12 h-12 rounded-full bg-[#25D366]/10 dark:bg-[#25D366]/20 border border-[#25D366]/20 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#25D366]/30 text-xl">
                     <i class="fa-brands fa-whatsapp"></i>

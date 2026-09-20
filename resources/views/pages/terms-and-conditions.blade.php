@@ -11,7 +11,7 @@
             
             <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">قبول الشروط</h2>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-                باستخدامك لمنصة Xpro، فإنك تقر بأنك قرأت وفهمت ووافقت على هذه الشروط والأحكام. إذا كنت لا توافق على هذه الشروط، يرجى عدم استخدام منصتنا.
+                باستخدامك لمنصة Education، فإنك تقر بأنك قرأت وفهمت ووافقت على هذه الشروط والأحكام. إذا كنت لا توافق على هذه الشروط، يرجى عدم استخدام منصتنا.
             </p>
 
             <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">الخدمات التعليمية</h2>
@@ -75,7 +75,7 @@
                 إذا كان لديك أي أسئلة حول هذه الشروط والأحكام، يمكنك التواصل معنا عبر:
             </p>
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
-                <p class="text-gray-600 dark:text-gray-300">البريد الإلكتروني: legal@xpro.com</p>
+                <p class="text-gray-600 dark:text-gray-300">البريد الإلكتروني: legal@education.com</p>
                 <p class="text-gray-600 dark:text-gray-300">الهاتف: 01551322666</p>
             </div>
 

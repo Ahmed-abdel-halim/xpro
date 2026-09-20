@@ -9,7 +9,7 @@
         
         <div class="prose prose-lg dark:prose-invert max-w-none">
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-                نحن في منصة Xpro نلتزم بحماية خصوصيتك وبياناتك الشخصية. توضح هذه السياسة كيفية جمع واستخدام وحماية معلوماتك عند استخدامك لمنصتنا.
+                نحن في منصة Education نلتزم بحماية خصوصيتك وبياناتك الشخصية. توضح هذه السياسة كيفية جمع واستخدام وحماية معلوماتك عند استخدامك لمنصتنا.
             </p>
 
             <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">المعلومات التي نجمعها</h2>
@@ -48,7 +48,7 @@
                 إذا كان لديك أي أسئلة أو استفسارات حول سياسة الخصوصية، يمكنك التواصل معنا عبر:
             </p>
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
-                <p class="text-gray-600 dark:text-gray-300">البريد الإلكتروني: privacy@xpro.com</p>
+                <p class="text-gray-600 dark:text-gray-300">البريد الإلكتروني: privacy@education.com</p>
                 <p class="text-gray-600 dark:text-gray-300">الهاتف: 01551322666</p>
             </div>
 

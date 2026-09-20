@@ -93,6 +93,10 @@
                         </td>
                         <td class="p-4 text-center">
                             <div class="flex items-center justify-center space-x-2 space-x-reverse">
+                                <a href="{{ route('admin.lessons.videos', $subject->id) }}" 
+                                   class="p-2 hover:bg-amber-500/10 rounded-lg text-amber-500 transition" title="إدارة الفيديوهات">
+                                    <i class="fa-solid fa-video"></i>
+                                </a>
                                 <a href="{{ route('admin.subjects.courses', $subject->id) }}" 
                                    class="p-2 hover:bg-purple-500/10 rounded-lg text-purple-400 transition" title="عرض الكورسات">
                                     <i class="fa-solid fa-eye"></i>
@@ -109,6 +113,7 @@
                                     </button>
                                 </form>
                             </div>
+
                         </td>
                     </tr>
                     @endforeach

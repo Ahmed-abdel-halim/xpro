@@ -27,7 +27,7 @@ class NewPaymentReceived extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('دفع جديد - منصة Xpro')
+            ->subject('دفع جديد - منصة Education')
             ->greeting('مرحباً ' . $notifiable->name)
             ->line('تم استلام طلب دفع جديد من الطالب: ' . $this->payment->student->name)
             ->line('الكورس: ' . $this->payment->course->title)

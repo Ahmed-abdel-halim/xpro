@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'لوحة التحكم') - Xpro</title>
+    <title>@yield('title', 'لوحة التحكم') - Education</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -171,8 +171,8 @@
         <aside :class="sidebarOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'" 
                class="sidebar-glass w-64 flex-shrink-0 flex flex-col border-l border-[var(--border-color)] fixed lg:static inset-y-0 right-0 z-[50] transition-transform duration-300 ease-in-out">
             <div class="h-20 flex items-center justify-between px-6 border-b border-gray-100/50 dark:border-white/5">
-                <a href="{{ route('home') }}" class="text-2xl font-bold gradient-text">Xpro Admin</a>
-                <button @click="sidebarOpen = false" class="lg:hidden text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                <a href="{{ route('home') }}" class="text-2xl font-bold gradient-text">Education Admin</a>
+                <button @click="sidebarOpen = false" class="lg:hidden text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:white">
                     <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
@@ -210,6 +210,18 @@
                         <i class="fa-solid fa-wallet ml-3 w-5 text-center"></i>
                         <span>الشؤون المالية</span>
                     </a>
+                    <a href="{{ route('admin.payments.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('admin.payments.*') ? 'active-link' : '' }}">
+                        <i class="fa-solid fa-money-bill-transfer ml-3 w-5 text-center"></i>
+                        <span>طلبات الدفع</span>
+                        @php $pendingCount = \App\Models\Payment::where('status','pending')->count(); @endphp
+                        @if($pendingCount > 0)
+                            <span class="mr-auto bg-red-500 text-white text-[10px] font-black px-1.5 py-0.5 rounded-full">{{ $pendingCount }}</span>
+                        @endif
+                    </a>
+                    <a href="{{ route('admin.subscription-codes.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('admin.subscription-codes.*') ? 'active-link' : '' }}">
+                        <i class="fa-solid fa-key ml-3 w-5 text-center"></i>
+                        <span>رموز الاشتراك</span>
+                    </a>
                     <a href="{{ route('admin.messages.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('admin.messages.*') ? 'active-link' : '' }}">
                         <i class="fa-solid fa-envelope ml-3 w-5 text-center"></i>
                         <span>رسائل التواصل</span>
@@ -231,10 +243,6 @@
                         <a href="{{ route('teacher.courses.index') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.courses.*') ? 'active-link' : '' }}">
                             <i class="fa-solid fa-file-video ml-3 w-5 text-center"></i>
                             <span>كورساتي</span>
-                        </a>
-                        <a href="{{ route('payments.teacher') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('payments.teacher') ? 'active-link' : '' }}">
-                            <i class="fa-solid fa-user-check ml-3 w-5 text-center"></i>
-                            <span>طلبات التفعيل</span>
                         </a>
                         <a href="{{ route('teacher.enrollments.create') }}" class="nav-link flex items-center px-6 py-3 mb-1 transition-colors hover:bg-gray-100 dark:hover:bg-white/5 {{ request()->routeIs('teacher.enrollments.create') ? 'active-link' : '' }}">
                             <i class="fa-solid fa-user-plus ml-3 w-5 text-center"></i>

@@ -15,10 +15,10 @@ class SettingSeeder extends Seeder
         $settings = [
             
             // Contact Info
-            ['key' => 'contact_phone', 'value' => '01551322666', 'group' => 'contact'],
-            ['key' => 'contact_email', 'value' => 'info@xpro.com', 'group' => 'contact'],
-            ['key' => 'contact_address', 'value' => 'مصر', 'group' => 'contact'],
-            ['key' => 'contact_whatsapp', 'value' => '201551322666', 'group' => 'contact'],
+            ['key' => 'contact_phone', 'value' => '07701234567', 'group' => 'contact'],
+            ['key' => 'contact_email', 'value' => 'info@education.com', 'group' => 'contact'],
+            ['key' => 'contact_address', 'value' => '', 'group' => 'contact'],
+            ['key' => 'contact_whatsapp', 'value' => '9647701234567', 'group' => 'contact'],
         ];
 
         foreach ($settings as $setting) {

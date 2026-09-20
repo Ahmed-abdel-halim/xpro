@@ -27,7 +27,7 @@ class PaymentConfirmed extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('تم تأكيد الدفع - منصة Xpro')
+            ->subject('تم تأكيد الدفع - منصة Education')
             ->greeting('مرحباً ' . $notifiable->name)
             ->line('تم تأكيد دفعك بنجاح!')
             ->line('الكورس: ' . $this->payment->course->title)

@@ -79,7 +79,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Xpro - @yield('title', 'منصة التعليم الحديثة')</title>
+    <title>Education - @yield('title', 'منصة التعليم الحديثة')</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23fbbf24%22/><text y=%22.9em%22 font-size=%2270%22 x=%2250%%22 text-anchor=%22middle%22 font-family=%22serif%22 fill=%22white%22>🎓</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -269,7 +269,7 @@
             <!-- Logo -->
             <a href="{{ route('home') }}" class="flex items-center space-x-3 space-x-reverse group">
                 <i class="fa-solid fa-graduation-cap text-3xl text-[#fbbf24] dark:text-sky-400 group-hover:scale-110 transition-transform duration-300"></i>
-                <span class="text-2xl font-black text-white transition-colors">Xpro</span>
+                <span class="text-2xl font-black text-white transition-colors">Education</span>
             </a>
 
             <!-- Navigation Links (Center) -->
@@ -546,7 +546,7 @@
                     <div class="space-y-4">
                         <div class="flex items-center gap-3 mb-6">
                             <i class="fa-solid fa-graduation-cap text-3xl text-[#fbbf24] dark:text-sky-400"></i>
-                            <span class="text-2xl font-black text-white">Xpro</span>
+                            <span class="text-2xl font-black text-white">Education</span>
                         </div>
                         <p class="text-gray-300 leading-relaxed">
                             منصة تعليمية رائدة تقدم محتوى تعليمي عالي الجودة للطلاب في جميع المراحل الدراسية
@@ -619,36 +619,14 @@
                     <div class="space-y-4">
                         <h3 class="text-xl font-black text-white mb-6">المراحل الدراسية</h3>
                         <ul class="space-y-3">
+                            @foreach(\App\Models\Stage::all() as $fStage)
                             <li>
-                                <a href="{{ route('stage.show', 1) }}" class="text-gray-300 hover:text-amber-400 dark:hover:text-sky-400 transition-colors duration-300 flex items-center gap-2">
+                                <a href="{{ route('stage.show', $fStage->id) }}" class="text-gray-300 hover:text-amber-400 dark:hover:text-sky-400 transition-colors duration-300 flex items-center gap-2">
                                     <i class="fa-solid fa-chevron-left text-xs"></i>
-                                    المرحلة الابتدائية
+                                    {{ $fStage->name }}
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ route('stage.show', 2) }}" class="text-gray-300 hover:text-amber-400 dark:hover:text-sky-400 transition-colors duration-300 flex items-center gap-2">
-                                    <i class="fa-solid fa-chevron-left text-xs"></i>
-                                    المرحلة الإعدادية
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('stage.show', 3) }}" class="text-gray-300 hover:text-amber-400 dark:hover:text-sky-400 transition-colors duration-300 flex items-center gap-2">
-                                    <i class="fa-solid fa-chevron-left text-xs"></i>
-                                    المرحلة الثانوية
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('stage.show', 4) }}" class="text-gray-300 hover:text-amber-400 dark:hover:text-sky-400 transition-colors duration-300 flex items-center gap-2">
-                                    <i class="fa-solid fa-chevron-left text-xs"></i>
-                                    التعليم الجامعي
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('stage.show', 5) }}" class="text-gray-300 hover:text-amber-400 dark:hover:text-sky-400 transition-colors duration-300 flex items-center gap-2">
-                                    <i class="fa-solid fa-chevron-left text-xs"></i>
-                                    سوق العمل
-                                </a>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
 
@@ -662,18 +640,20 @@
                                 </div>
                                 <div>
                                     <p class="text-gray-300">البريد الإلكتروني</p>
-                                    <p class="text-white font-black">{{ $settings['contact_email'] ?? 'info@xpro.com' }}</p>
+                                    <p class="text-white font-black">{{ $settings['contact_email'] ?? 'info@education.com' }}</p>
                                 </div>
                             </li>
+                            @if(!empty($settings['contact_phone']))
                             <li class="flex items-start gap-3">
                                 <div class="w-8 h-8 rounded-lg bg-amber-500/20 dark:bg-sky-500/20 flex items-center justify-center flex-shrink-0 mt-1">
-                                    <i class="fa-solid fa-location-dot text-amber-400 dark:text-sky-400 text-sm"></i>
+                                    <i class="fa-solid fa-phone text-amber-400 dark:text-sky-400 text-sm"></i>
                                 </div>
                                 <div>
-                                    <p class="text-gray-300">العنوان</p>
-                                    <p class="text-white font-black">{{ $settings['contact_address'] ?? 'مصر' }}</p>
+                                    <p class="text-gray-300">رقم التواصل</p>
+                                    <p class="text-white font-black">{{ $settings['contact_phone'] }}</p>
                                 </div>
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -684,7 +664,7 @@
         <div class="bg-[#003d33] dark:bg-gray-900 border-t border-white/5">
             <div class="max-w-[1440px] mx-auto px-6 py-6 text-center">
                 <p class="text-gray-400 text-sm mb-4">
-                    &copy; {{ date('Y') }} Xpro. جميع الحقوق محفوظة. للتعليم التفاعلي في متناول الجميع
+                    &copy; {{ date('Y') }} Education. جميع الحقوق محفوظة. للتعليم التفاعلي في متناول الجميع
                 </p>
                 <p class="text-gray-400 text-sm mb-4 border-b border-gray-700 pb-4">
                     تم التصميم والتطوير بواسطة 
